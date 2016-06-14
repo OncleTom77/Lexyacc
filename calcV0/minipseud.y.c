@@ -114,6 +114,7 @@
 	extern FILE *yyin;
 
 	t_list_chain* list = NULL;
+	Node* node;
 
 
 /* Enabling traces.  */
@@ -136,12 +137,12 @@
 
 #if ! defined YYSTYPE && ! defined YYSTYPE_IS_DECLARED
 typedef union YYSTYPE
-#line 16 "minipseud.y"
+#line 17 "minipseud.y"
 {
 	struct Node *node;
 }
 /* Line 193 of yacc.c.  */
-#line 145 "minipseud.tab.c"
+#line 146 "minipseud.tab.c"
 	YYSTYPE;
 # define yystype YYSTYPE /* obsolescent; will be withdrawn */
 # define YYSTYPE_IS_DECLARED 1
@@ -154,7 +155,7 @@ typedef union YYSTYPE
 
 
 /* Line 216 of yacc.c.  */
-#line 158 "minipseud.tab.c"
+#line 159 "minipseud.tab.c"
 
 #ifdef short
 # undef short
@@ -443,8 +444,8 @@ static const yytype_int8 yyrhs[] =
 /* YYRLINE[YYN] -- source line where rule number YYN was defined.  */
 static const yytype_uint8 yyrline[] =
 {
-       0,    43,    43,    44,    49,    50,    54,    55,    59,    60,
-      65,    66,    67,    68,    69,    70,    71,    72,    73
+       0,    44,    44,    45,    50,    51,    55,    56,    60,    61,
+      66,    67,    68,    69,    70,    71,    72,    73,    74
 };
 #endif
 
@@ -1366,93 +1367,93 @@ yyreduce:
   switch (yyn)
     {
         case 2:
-#line 43 "minipseud.y"
+#line 44 "minipseud.y"
     {/* Nothing ... */ ;}
     break;
 
   case 3:
-#line 44 "minipseud.y"
+#line 45 "minipseud.y"
     { /* Nothing ... */ ;}
     break;
 
   case 4:
-#line 49 "minipseud.y"
+#line 50 "minipseud.y"
     {  ;}
     break;
 
   case 5:
-#line 50 "minipseud.y"
+#line 51 "minipseud.y"
     { exec((yyvsp[(1) - (2)].node));    ;}
     break;
 
   case 6:
-#line 54 "minipseud.y"
-    {; ;}
-    break;
-
-  case 7:
 #line 55 "minipseud.y"
-    { ; ;}
-    break;
-
-  case 8:
-#line 59 "minipseud.y"
-    { printf("Affectation !\n"); list_chain_append(&list, (yyvsp[(1) - (4)].node)->var, (yyvsp[(3) - (4)].node)->val); (yyval.node)=nodeChildren((yyvsp[(2) - (4)].node), (yyvsp[(1) - (4)].node), (yyvsp[(3) - (4)].node)); ;}
-    break;
-
-  case 9:
-#line 60 "minipseud.y"
-    { (yyval.node) = (yyvsp[(1) - (2)].node); ;}
-    break;
-
-  case 10:
-#line 65 "minipseud.y"
     { (yyval.node)=(yyvsp[(1) - (1)].node); ;}
     break;
 
-  case 11:
+  case 7:
+#line 56 "minipseud.y"
+    { (yyval.node)=nodeChildren(createNode(NTINSTLIST), (yyvsp[(1) - (2)].node), (yyvsp[(2) - (2)].node)); ;}
+    break;
+
+  case 8:
+#line 60 "minipseud.y"
+    { (yyval.node)=nodeChildren((yyvsp[(2) - (4)].node), (yyvsp[(1) - (4)].node), (yyvsp[(3) - (4)].node)); ;}
+    break;
+
+  case 9:
+#line 61 "minipseud.y"
+    { (yyval.node)=(yyvsp[(1) - (2)].node); ;}
+    break;
+
+  case 10:
 #line 66 "minipseud.y"
     { (yyval.node)=(yyvsp[(1) - (1)].node); ;}
     break;
 
-  case 12:
+  case 11:
 #line 67 "minipseud.y"
-    { (yyval.node)=nodeChildren((yyvsp[(2) - (3)].node), (yyvsp[(1) - (3)].node), (yyvsp[(3) - (3)].node)); ;}
+    { (yyval.node)=(yyvsp[(1) - (1)].node); ;}
     break;
 
-  case 13:
+  case 12:
 #line 68 "minipseud.y"
     { (yyval.node)=nodeChildren((yyvsp[(2) - (3)].node), (yyvsp[(1) - (3)].node), (yyvsp[(3) - (3)].node)); ;}
     break;
 
-  case 14:
+  case 13:
 #line 69 "minipseud.y"
     { (yyval.node)=nodeChildren((yyvsp[(2) - (3)].node), (yyvsp[(1) - (3)].node), (yyvsp[(3) - (3)].node)); ;}
     break;
 
-  case 15:
+  case 14:
 #line 70 "minipseud.y"
     { (yyval.node)=nodeChildren((yyvsp[(2) - (3)].node), (yyvsp[(1) - (3)].node), (yyvsp[(3) - (3)].node)); ;}
     break;
 
-  case 16:
+  case 15:
 #line 71 "minipseud.y"
-    { ; ;}
+    { (yyval.node)=nodeChildren((yyvsp[(2) - (3)].node), (yyvsp[(1) - (3)].node), (yyvsp[(3) - (3)].node)); ;}
     break;
 
-  case 17:
+  case 16:
 #line 72 "minipseud.y"
     { ; ;}
     break;
 
-  case 18:
+  case 17:
 #line 73 "minipseud.y"
+    { (yyval.node)=nodeChildren((yyvsp[(2) - (3)].node), (yyvsp[(1) - (3)].node), (yyvsp[(3) - (3)].node)); ;}
+    break;
+
+  case 18:
+#line 74 "minipseud.y"
     { (yyval.node)=(yyvsp[(2) - (3)].node); ;}
     break;
 
 
 /* Line 1267 of yacc.c.  */
-#line 1456 "minipseud.tab.c"
+#line 1457 "minipseud.tab.c"
       default: break;
     }
   YY_SYMBOL_PRINT ("-> $$ =", yyr1[yyn], &yyval, &yyloc);
@@ -1666,12 +1667,12 @@ yyreturn:
 }
 
 
-#line 75 "minipseud.y"
+#line 76 "minipseud.y"
 
 
 int exec(Node *node) {
 	printGraph(node);
-	eval(node, list);
+	eval(node, &list);
 }
 
 int yyerror(char *s) {

@@ -74,7 +74,7 @@
 
 #if ! defined YYSTYPE && ! defined YYSTYPE_IS_DECLARED
 typedef union YYSTYPE
-#line 16 "minipseud.y"
+#line 17 "minipseud.y"
 {
 	struct Node *node;
 }

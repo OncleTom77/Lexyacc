@@ -9,7 +9,7 @@
 int printDepth = 0;
 int funcDepth = 0;
 
-t_list_chain* listVar = NULL;
+t_list_chain** listVar = NULL;
 
 double evalExpr(Node *node) {
 	switch ( node->type ) {
@@ -18,7 +18,7 @@ double evalExpr(Node *node) {
 		case NTNUM:
 			return node->val;
 		case NTVAR:
-			return get_value_in_list(listVar, node->var);
+			return get_value_in_list(*listVar, node->var);
 		 
 		case NTPLUS:
 			return evalExpr(node->children[0]) + evalExpr(node->children[1]);
@@ -37,12 +37,15 @@ double evalExpr(Node *node) {
 }
 
 
-void evalInst(Node* node) {
-	double val;
+double evalInst(Node* node) {
+	double value;
 	switch ( node->type ) {
 		case NTEMPTY:
-			return;
+			return 0.0;
 		case NTINSTLIST:
+			evalInst(node->children[0]);
+			evalInst(node->children[1]);
+			return 0.0;
 		case NTNUM:
 		case NTVAR:
 		case NTPLUS:
@@ -50,12 +53,15 @@ void evalInst(Node* node) {
 		case NTMULT:
 		case NTDIV:
 		case NTPOW:
-			printf("%f\n", evalExpr(node));
-			return;
+			value = evalExpr(node);
+			printf("%lf\n", value);
+			return value;
 
 		case NTEGAL:
-			printf("%s = %f\n", node->children[0]->var, node->children[1]->val);
-			return;
+			value = evalExpr(node->children[1]);
+			list_chain_append(listVar, node->children[0]->var, value);
+			printf("%s = %lf\n", node->children[0]->var, value);
+			return value;
 		 
 		default:
 			printf("Error in evalInst ... Wrong node type: %s\n", node2String(node));
@@ -63,7 +69,7 @@ void evalInst(Node* node) {
 	};
 }
 
-void eval(Node *node, t_list_chain* list) {
+double eval(Node *node, t_list_chain** list) {
 	listVar = list;
-	evalInst(node);
+	return evalInst(node);
 }

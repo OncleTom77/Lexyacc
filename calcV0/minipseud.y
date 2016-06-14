@@ -11,6 +11,7 @@
 	extern FILE *yyin;
 
 	t_list_chain* list = NULL;
+	Node* node;
 %}
 
 %union {
@@ -51,13 +52,13 @@ Line:
 	;
 
 Instlist:
-	Inst {; } 
-	| Instlist Inst { ; }
+	Inst { $$=$1; }
+	| Instlist Inst { $$=nodeChildren(createNode(NTINSTLIST), $1, $2); }
 	;
 
 Inst:
-	VARIABLE EGAL Expr COLON { printf("Affectation !\n"); list_chain_append(&list, $1->var, $3->val); $$=nodeChildren($2, $1, $3); }
-	| Expr COLON { $$ = $1; }
+	VARIABLE EGAL Expr COLON { $$=nodeChildren($2, $1, $3); }
+	| Expr COLON { $$=$1; }
 	;
 
 
@@ -69,14 +70,14 @@ Expr:
 	| Expr MULT Expr     	{ $$=nodeChildren($2, $1, $3); }
 	| Expr DIV Expr      	{ $$=nodeChildren($2, $1, $3); }
 	| MIN Expr %prec NEG 	{ ; }
-	| Expr POW Expr      	{ ; }
+	| Expr POW Expr      	{ $$=nodeChildren($2, $1, $3); }
 	| OP_PAR Expr CL_PAR 	{ $$=$2; }
 	;
 %%
 
 int exec(Node *node) {
 	printGraph(node);
-	eval(node, list);
+	eval(node, &list);
 }
 
 int yyerror(char *s) {

@@ -19,6 +19,10 @@ void list_chain_append(t_list_chain** list, char* var, double val) {
 	t_list_chain* newMaillon = list_chain_create(var, val);
 
 	while(*list != NULL) {
+		if(strcmp((*list)->name, var) == 0) {
+			(*list)->value = val;
+			return;
+		}
 		list = &(*list)->next;
 	}
 

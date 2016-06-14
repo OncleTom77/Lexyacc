@@ -81,7 +81,6 @@ const char* makeSpaces(int depth, int fdepth) {
 }
 
 void printGraphRecu(Node *node, int n) {
-	
 	int i;
 	for ( i=0;i<n;i++) {
 		printf(" ");

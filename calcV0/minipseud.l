@@ -21,12 +21,6 @@ variable  [a-zA-Z]+
 
 {empty}  { /* Nothing */ }
 
- 
-
-"("   return(OP_PAR);
-")"   return(CL_PAR);
-
-
 {real}    {
     yylval.node = createNode(NTNUM);
     yylval.node->val = atof(yytext);
@@ -37,7 +31,11 @@ variable  [a-zA-Z]+
 	yylval.node = createNode(NTVAR);
 	yylval.node->var = (char*) strdup(yytext);
 	return(VARIABLE);
-}
+} 
+
+
+"("   return(OP_PAR);
+")"   return(CL_PAR);
 
 "+"   { yylval.node = createNode(NTPLUS); return(PLUS); }
 "-"   { yylval.node = createNode(NTMIN); return(MIN); }
@@ -45,8 +43,8 @@ variable  [a-zA-Z]+
 "/"   { yylval.node = createNode(NTDIV); return(DIV); }
 "^"   { yylval.node = createNode(NTPOW); return(POW); }
 
-"=" { yylval.node = createNode(NTEGAL); return(EGAL); } 
+"="   { yylval.node = createNode(NTEGAL); return(EGAL); } 
 
-";"    { return(COLON); }
+";"   { return(COLON); }
 
-"\n"   { return(EOL); }
+"\n"  { return(EOL); }
