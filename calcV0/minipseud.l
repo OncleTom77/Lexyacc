@@ -7,44 +7,75 @@
 
 %}
 
-empty    [ \t]+
+empty 		[ \t]+
 
-num   [0-9]
-int    {num}+
-exp  [eE][+-]?{int}
+num 		[0-9]
+int			{num}+
+exp 		[eE][+-]?{int}
 
-real      {int}("."{int})?{exp}?
+real    	{int}("."{int})?{exp}?
 
-variable  [a-zA-Z]+
+variable 	[a-zA-Z]+
 
 %%
 
 {empty}  { /* Nothing */ }
 
-{real}    {
+{real} {
     yylval.node = createNode(NTNUM);
     yylval.node->val = atof(yytext);
     return(NUM);
 }
 
-{variable}	{
+== {
+	yylval.node = createNode(NTCOMPEGAL);
+	return(COMPEGAL);
+}
+
+"<" {
+	yylval.node = createNode(NTCOMPINF);
+	return(COMPINF);
+}
+
+">" {
+	yylval.node = createNode(NTCOMPSUP);
+	return(COMPSUP);
+}
+
+SI {
+	return(SI);
+}
+
+ALORS {
+	return(ALORS);
+}
+
+SINON {
+	return(SINON);
+}
+
+PRINT {
+	return(PRINT);
+}
+
+{variable} {
 	yylval.node = createNode(NTVAR);
 	yylval.node->var = (char*) strdup(yytext);
 	return(VARIABLE);
-} 
+}
 
 
-"("   return(OP_PAR);
-")"   return(CL_PAR);
+"("   	return(OP_PAR);
+")"   	return(CL_PAR);
 
-"+"   { yylval.node = createNode(NTPLUS); return(PLUS); }
-"-"   { yylval.node = createNode(NTMIN); return(MIN); }
-"*"   { yylval.node = createNode(NTMULT); return(MULT); }
-"/"   { yylval.node = createNode(NTDIV); return(DIV); }
-"^"   { yylval.node = createNode(NTPOW); return(POW); }
+"+"   	{ yylval.node = createNode(NTPLUS); return(PLUS); }
+"-"   	{ yylval.node = createNode(NTMIN); return(MIN); }
+"*"   	{ yylval.node = createNode(NTMULT); return(MULT); }
+"/"   	{ yylval.node = createNode(NTDIV); return(DIV); }
+"^"   	{ yylval.node = createNode(NTPOW); return(POW); }
 
-"="   { yylval.node = createNode(NTEGAL); return(EGAL); } 
+"="   	{ yylval.node = createNode(NTEGAL); return(EGAL); } 
 
-";"   { return(COLON); }
+";"   	{ return(COLON); }
 
-"\n"  { return(EOL); }
+"\n"  	{ return(EOL); }

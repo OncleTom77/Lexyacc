@@ -1,12 +1,19 @@
 toto = 4 + 2;
 3+toto;
 
-1+3;
+PRINT(-3+4);
+PRINT(-(3*4));
 3*5;10*100000;toto = 2;toto = ((2+3)*4)/2;
 (2+4)*9;
 2+(4*9);
 2+4*9;
 
 3^2;
-toto = toto^3;
-toto/2;
+toto = (toto^3)*toto;
+toto = toto/2;
+
+PRINT(toto);
+
+SI(toto == 3) ALORS PRINT(3); toto = toto + 3;
+
+PRINT(toto);

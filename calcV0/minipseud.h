@@ -51,7 +51,11 @@
      CL_PAR = 267,
      COLON = 268,
      NEG = 269,
-     EOL = 270
+     EOL = 270,
+     PRINT = 271,
+     SI = 272,
+     ALORS = 273,
+     SINON = 274
    };
 #endif
 /* Tokens.  */
@@ -68,18 +72,22 @@
 #define COLON 268
 #define NEG 269
 #define EOL 270
+#define PRINT 271
+#define SI 272
+#define ALORS 273
+#define SINON 274
 
 
 
 
 #if ! defined YYSTYPE && ! defined YYSTYPE_IS_DECLARED
 typedef union YYSTYPE
-#line 17 "minipseud.y"
+#line 16 "minipseud.y"
 {
 	struct Node *node;
 }
 /* Line 1529 of yacc.c.  */
-#line 83 "minipseud.tab.h"
+#line 91 "minipseud.tab.h"
 	YYSTYPE;
 # define yystype YYSTYPE /* obsolescent; will be withdrawn */
 # define YYSTYPE_IS_DECLARED 1

@@ -54,14 +54,17 @@ double evalInst(Node* node) {
 		case NTDIV:
 		case NTPOW:
 			value = evalExpr(node);
-			printf("%lf\n", value);
+			//printf("%lf\n", value);
 			return value;
 
 		case NTEGAL:
 			value = evalExpr(node->children[1]);
 			list_chain_append(listVar, node->children[0]->var, value);
-			printf("%s = %lf\n", node->children[0]->var, value);
+			//printf("%s = %lf\n", node->children[0]->var, value);
 			return value;
+
+		case NTCOMPEGAL:
+			return;
 		 
 		default:
 			printf("Error in evalInst ... Wrong node type: %s\n", node2String(node));

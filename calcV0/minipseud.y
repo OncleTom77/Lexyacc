@@ -11,7 +11,6 @@
 	extern FILE *yyin;
 
 	t_list_chain* list = NULL;
-	Node* node;
 %}
 
 %union {
@@ -24,6 +23,8 @@
 %token   OP_PAR CL_PAR COLON
 %token   NEG
 %token   EOL
+%token 	 PRINT
+%token	 SI ALORS SINON
 
 
 %type   <node> Instlist
@@ -59,8 +60,20 @@ Instlist:
 Inst:
 	VARIABLE EGAL Expr COLON { $$=nodeChildren($2, $1, $3); }
 	| Expr COLON { $$=$1; }
+	| PRINT OP_PAR Expr CL_PAR COLON { $$=$3; printf("%lf\n", eval($3, &list)); }
+	| SI OP_PAR Expr CL_PAR ALORS Instlist { 
+		if(eval($3) != 0) {
+			$$=$5;
+		}
+	}
+	| SI Expr ALORS Expr SINON Expr {
+		if(eval($2) != 0) {
+			$$=$4;
+		} else {
+			$$=$6;
+		}
+	}
 	;
-
 
 Expr:
 	NUM						{ $$=$1; }
@@ -69,9 +82,12 @@ Expr:
 	| Expr MIN Expr      	{ $$=nodeChildren($2, $1, $3); }
 	| Expr MULT Expr     	{ $$=nodeChildren($2, $1, $3); }
 	| Expr DIV Expr      	{ $$=nodeChildren($2, $1, $3); }
-	| MIN Expr %prec NEG 	{ ; }
+	| MIN Expr %prec NEG 	{ Node* moinsUn = createNode(NTNUM); moinsUn->val = -1; $$=nodeChildren(createNode(NTMULT), moinsUn, $2); }
 	| Expr POW Expr      	{ $$=nodeChildren($2, $1, $3); }
 	| OP_PAR Expr CL_PAR 	{ $$=$2; }
+	| Expr COMPEGAL	Expr	{ $$=nodeChildren($2, $1, $3); }
+	| Expr COMPINF	Expr	{ $$=nodeChildren($2, $1, $3); }
+	| Expr COMPSUP	Expr	{ $$=nodeChildren($2, $1, $3); }
 	;
 %%
 

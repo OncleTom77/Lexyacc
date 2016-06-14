@@ -6,6 +6,9 @@ enum NodeType {
 	NTINSTLIST 	= 1,
 	NTINST 		= 2,
 	
+	NTSI 		= 10,
+	NTALORS		= 11,
+	NTSINON		= 12,	
 
 	NTNUM   	= 201,
     NTVAR 		= 202,
@@ -19,7 +22,13 @@ enum NodeType {
     NTPARG 		= 326,
     NTPARD 		= 327,
 
-    NTEGAL 		= 328
+    NTEGAL 		= 328,
+
+    NTCOMPEGAL	= 350,
+    NTCOMPINF	= 351,
+    NTCOMPSUP	= 352,
+
+    NTPRINT		= 400
 };
    
 typedef struct Node {
