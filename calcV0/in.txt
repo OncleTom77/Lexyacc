@@ -16,8 +16,19 @@ toto = toto/2;
 
 PRINT(toto);
 
-SI(toto != 5000) ALORS PRINT(3); toto = toto + 3;
+SI(toto != 5000) ALORS PRINT(3); toto = toto + 3; FIN;
 
-SI(toto == 5000) ALORS PRINT(6); toto = -12; SINON PRINT(12); toto = 14;
+SI(toto == 5000) ALORS PRINT(6); toto = -12; SINON PRINT(12); toto = 14; FIN;
+
+PRINT(toto);
+
+i = 0;
+TANTQUE(i<10) FAIRE PRINT(i); i = i + 1; SI(i == 5) ALORS PRINT(i*100); FIN; FIN;
+
+i = 10;
+TANTQUE(i>0) FAIRE SI(i == 5) ALORS PRINT(i*10); SINON PRINT(i); FIN; i = i - 1; FIN;
+
+toto = 0;
+FOR(i=0; i<10; i=i+1) FAIRE PRINT(i); toto = toto + i; FIN;
 
 PRINT(toto);

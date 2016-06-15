@@ -64,6 +64,15 @@ const char* node2String(Node *node) {
 		case NTSINON:
 			return "NTSINON";
 
+		case NTTANTQUE:
+			return "NTTANTQUE";
+
+		case NTFOR:
+			return "NTFOR";
+
+		case NTFORTRAIT:
+			return "NTFORTRAIT";
+
 		case NTCOMPEGAL:
 			return "NTCOMPEGAL";
 		case NTCOMPDIFF:
@@ -74,9 +83,7 @@ const char* node2String(Node *node) {
 			return "NTCOMPSUP";
 
 		case NTPRINT:
-			res = (char *)malloc(sizeof(char) * 32);
-			sprintf(res, "NTPRINT -> %f", node->val);
-			return res;
+			return "NTPRINT";
 		
 		default:
 			return "UNK";
@@ -102,6 +109,11 @@ const char* makeSpaces(int depth, int fdepth) {
 }
 
 void printGraphRecu(Node *node, int n) {
+	
+	if(!node) {
+		return;
+	}
+	
 	int i;
 	for ( i=0;i<n;i++) {
 		printf(" ");
@@ -110,7 +122,7 @@ void printGraphRecu(Node *node, int n) {
 	printf("%s\n", node2String(node));
 	
 	// Hack : No children only if null or number or variable or PRINT
-	if ((node->children != NULL) && (node->type != NTNUM) && (node->type != NTVAR) && (node->type != NTPRINT)) {
+	if ((node->children != NULL) && (node->type != NTNUM) && (node->type != NTVAR)) {
 		printGraphRecu(node->children[0], n+1);
 		printGraphRecu(node->children[1], n+1);
 	}

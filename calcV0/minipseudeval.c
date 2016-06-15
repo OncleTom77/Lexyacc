@@ -79,6 +79,18 @@ double evalInst(Node* node) {
 			}
 			return 0;
 
+		case NTTANTQUE:
+			while(evalInst(node->children[0]) != 0) {
+				evalInst(node->children[1]);
+			}
+			return 0;
+
+		case NTFOR:
+			for(evalInst(node->children[0]->children[0]); evalInst(node->children[0]->children[1]) != 0; evalInst(node->children[1]->children[0])) {
+				evalInst(node->children[1]->children[1]);
+			}
+			return 0;
+
 		case NTCOMPEGAL:
 			return (evalExpr(node->children[0]) == evalExpr(node->children[1])) ? 1 : 0;
 
@@ -92,7 +104,7 @@ double evalInst(Node* node) {
 			return (evalExpr(node->children[0]) > evalExpr(node->children[1])) ? 1 : 0;
 
 		case NTPRINT:
-			printf("%lf\n", node->val);
+			printf("%lf\n", evalExpr(node->children[0]));
 			return 0;
 
 		default:

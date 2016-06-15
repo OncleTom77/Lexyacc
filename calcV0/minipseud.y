@@ -23,6 +23,7 @@
 %token	 <node> SI ALORS
 %token	 <node> COMPEGAL COMPDIFF COMPINF COMPSUP
 %token	 <node> TANTQUE
+%token	 <node> FOR
 %token 	 <node> PRINT
 %token   OP_PAR CL_PAR COLON
 %token	 SINON
@@ -52,21 +53,22 @@ Input:
 
 Line:
 	EOL {  }
-	| Instlist EOL { exec($1);    }
+	| Instlist EOL { exec($1); }
 	;
 
 Instlist:
-	Inst { $$=$1; }
-	| Instlist Inst { $$=nodeChildren(createNode(NTINSTLIST), $1, $2); }
+	Inst COLON { $$=$1; }
+	| Instlist Inst COLON { $$=nodeChildren(createNode(NTINSTLIST), $1, $2); }
 	;
 
 Inst:
-	VARIABLE EGAL Expr COLON { $$=nodeChildren($2, $1, $3); }
-	| Expr COLON { $$=$1; }
-	| PRINT OP_PAR Expr CL_PAR COLON { $1->val = eval($3, &list); $$=$1; /*$$=$3; printf("%lf\n", eval($3, &list));*/ }
-	| SI OP_PAR Expr CL_PAR ALORS Instlist { $$=nodeChildren($1, $3, $6); }
-	| SI OP_PAR Expr CL_PAR ALORS Instlist SINON Instlist { $$=nodeChildren($1, $3, nodeChildren($5, $6, $8)); }
-	| TANTQUE OP_PAR Expr CL_PAR FAIRE Instlist FIN { ; }
+	VARIABLE EGAL Expr { $$=nodeChildren($2, $1, $3); }
+	| Expr { $$=$1; }
+	| PRINT OP_PAR Expr CL_PAR { $$=nodeChildren($1, $3, NULL); /*$$=$3; printf("%lf\n", eval($3, &list));*/ }
+	| SI OP_PAR Expr CL_PAR ALORS Instlist FIN { $$=nodeChildren($1, $3, $6); }
+	| SI OP_PAR Expr CL_PAR ALORS Instlist SINON Instlist FIN { $$=nodeChildren($1, $3, nodeChildren($5, $6, $8)); }
+	| TANTQUE OP_PAR Expr CL_PAR FAIRE Instlist FIN { $$=nodeChildren($1, $3, $6); }
+	| FOR OP_PAR Inst COLON Expr COLON Inst CL_PAR FAIRE Instlist FIN { printf("coucou\n"); $$=nodeChildren($1, nodeChildren(createNode(NTFORTRAIT), $3, $5), nodeChildren(createNode(NTFORTRAIT), $7, $10)); }
 	;
 
 Expr:

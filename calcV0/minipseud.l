@@ -52,6 +52,11 @@ TANTQUE {
 	return(TANTQUE);
 }
 
+FOR {
+	yylval.node = createNode(NTFOR);
+	return(FOR);
+}
+
 FAIRE {
 	return(FAIRE);
 }

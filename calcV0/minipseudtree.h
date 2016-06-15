@@ -11,6 +11,8 @@ enum NodeType {
 	NTSINON		= 12,
 
 	NTTANTQUE	= 20,
+	NTFOR		= 21,
+	NTFORTRAIT	= 22,
 
 	NTNUM   	= 201,
     NTVAR 		= 202,
