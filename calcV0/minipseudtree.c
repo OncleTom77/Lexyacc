@@ -56,6 +56,27 @@ const char* node2String(Node *node) {
 
 		case NTEGAL:
 			return "NTEGAL";
+
+		case NTSI:
+			return "NTSI";
+		case NTALORS:
+			return "NTALORS";
+		case NTSINON:
+			return "NTSINON";
+
+		case NTCOMPEGAL:
+			return "NTCOMPEGAL";
+		case NTCOMPDIFF:
+			return "NTCOMPDIFF";
+		case NTCOMPINF:
+			return "NTCOMPINF";
+		case NTCOMPSUP:
+			return "NTCOMPSUP";
+
+		case NTPRINT:
+			res = (char *)malloc(sizeof(char) * 32);
+			sprintf(res, "NTPRINT -> %f", node->val);
+			return res;
 		
 		default:
 			return "UNK";
@@ -88,8 +109,8 @@ void printGraphRecu(Node *node, int n) {
 
 	printf("%s\n", node2String(node));
 	
-	// Hack : No children only if null or number or variable
-	if ((node->children != NULL) && (node->type != NTNUM) && (node->type != NTVAR)) {
+	// Hack : No children only if null or number or variable or PRINT
+	if ((node->children != NULL) && (node->type != NTNUM) && (node->type != NTVAR) && (node->type != NTPRINT)) {
 		printGraphRecu(node->children[0], n+1);
 		printGraphRecu(node->children[1], n+1);
 	}

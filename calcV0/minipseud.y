@@ -20,16 +20,19 @@
 %token   <node> VARIABLE
 %token   <node> NUM
 %token   <node> PLUS MIN MULT DIV POW EGAL
+%token	 <node> SI ALORS
+%token	 <node> COMPEGAL COMPDIFF COMPINF COMPSUP
+%token	 <node> TANTQUE
+%token 	 <node> PRINT
 %token   OP_PAR CL_PAR COLON
+%token	 SINON
+%token	 FAIRE
 %token   NEG
 %token   EOL
-%token 	 PRINT
-%token	 SI ALORS SINON
+%token	 FIN
 
 
-%type   <node> Instlist
-%type   <node> Inst
-%type   <node> Expr
+%type   <node> Instlist Inst Expr
 
 
 %left PLUS  MIN
@@ -60,19 +63,10 @@ Instlist:
 Inst:
 	VARIABLE EGAL Expr COLON { $$=nodeChildren($2, $1, $3); }
 	| Expr COLON { $$=$1; }
-	| PRINT OP_PAR Expr CL_PAR COLON { $$=$3; printf("%lf\n", eval($3, &list)); }
-	| SI OP_PAR Expr CL_PAR ALORS Instlist { 
-		if(eval($3) != 0) {
-			$$=$5;
-		}
-	}
-	| SI Expr ALORS Expr SINON Expr {
-		if(eval($2) != 0) {
-			$$=$4;
-		} else {
-			$$=$6;
-		}
-	}
+	| PRINT OP_PAR Expr CL_PAR COLON { $1->val = eval($3, &list); $$=$1; /*$$=$3; printf("%lf\n", eval($3, &list));*/ }
+	| SI OP_PAR Expr CL_PAR ALORS Instlist { $$=nodeChildren($1, $3, $6); }
+	| SI OP_PAR Expr CL_PAR ALORS Instlist SINON Instlist { $$=nodeChildren($1, $3, nodeChildren($5, $6, $8)); }
+	| TANTQUE OP_PAR Expr CL_PAR FAIRE Instlist FIN { ; }
 	;
 
 Expr:
@@ -86,8 +80,9 @@ Expr:
 	| Expr POW Expr      	{ $$=nodeChildren($2, $1, $3); }
 	| OP_PAR Expr CL_PAR 	{ $$=$2; }
 	| Expr COMPEGAL	Expr	{ $$=nodeChildren($2, $1, $3); }
-	| Expr COMPINF	Expr	{ $$=nodeChildren($2, $1, $3); }
-	| Expr COMPSUP	Expr	{ $$=nodeChildren($2, $1, $3); }
+	| Expr COMPDIFF	Expr	{ $$=nodeChildren($2, $1, $3); }
+	| Expr COMPINF Expr		{ $$=nodeChildren($2, $1, $3); }
+	| Expr COMPSUP Expr		{ $$=nodeChildren($2, $1, $3); }
 	;
 %%
 

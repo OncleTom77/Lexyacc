@@ -1,4 +1,6 @@
 toto = 4 + 2;
+toto = -toto;
+PRINT(-toto);
 3+toto;
 
 PRINT(-3+4);
@@ -14,6 +16,8 @@ toto = toto/2;
 
 PRINT(toto);
 
-SI(toto == 3) ALORS PRINT(3); toto = toto + 3;
+SI(toto != 5000) ALORS PRINT(3); toto = toto + 3;
+
+SI(toto == 5000) ALORS PRINT(6); toto = -12; SINON PRINT(12); toto = 14;
 
 PRINT(toto);

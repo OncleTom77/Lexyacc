@@ -32,6 +32,11 @@ variable 	[a-zA-Z]+
 	return(COMPEGAL);
 }
 
+!= {
+	yylval.node = createNode(NTCOMPDIFF);
+	return(COMPDIFF);
+}
+
 "<" {
 	yylval.node = createNode(NTCOMPINF);
 	return(COMPINF);
@@ -42,11 +47,26 @@ variable 	[a-zA-Z]+
 	return(COMPSUP);
 }
 
+TANTQUE {
+	yylval.node = createNode(NTTANTQUE);
+	return(TANTQUE);
+}
+
+FAIRE {
+	return(FAIRE);
+}
+
+FIN {
+	return(FIN);
+}
+
 SI {
+	yylval.node = createNode(NTSI);
 	return(SI);
 }
 
 ALORS {
+	yylval.node = createNode(NTALORS);
 	return(ALORS);
 }
 
@@ -55,6 +75,7 @@ SINON {
 }
 
 PRINT {
+	yylval.node = createNode(NTPRINT);
 	return(PRINT);
 }
 

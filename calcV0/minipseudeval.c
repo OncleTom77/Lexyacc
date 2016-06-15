@@ -53,9 +53,9 @@ double evalInst(Node* node) {
 		case NTMULT:
 		case NTDIV:
 		case NTPOW:
-			value = evalExpr(node);
+			return evalExpr(node);
 			//printf("%lf\n", value);
-			return value;
+			//return value;
 
 		case NTEGAL:
 			value = evalExpr(node->children[1]);
@@ -63,9 +63,38 @@ double evalInst(Node* node) {
 			//printf("%s = %lf\n", node->children[0]->var, value);
 			return value;
 
+		case NTSI:
+			// SI ... ALORS ... SINON
+			if(node->children[1]->type == NTALORS) {
+				if(evalInst(node->children[0]) != 0) {
+					evalInst(node->children[1]->children[0]);
+				} else {
+					evalInst(node->children[1]->children[1]);
+				}
+			} else {
+				// SI ... ALORS ...
+				if(evalInst(node->children[0]) != 0) {
+					evalInst(node->children[1]);
+				}
+			}
+			return 0;
+
 		case NTCOMPEGAL:
-			return;
-		 
+			return (evalExpr(node->children[0]) == evalExpr(node->children[1])) ? 1 : 0;
+
+		case NTCOMPDIFF:
+			return (evalExpr(node->children[0]) != evalExpr(node->children[1])) ? 1 : 0;
+
+		case NTCOMPINF:
+			return (evalExpr(node->children[0]) < evalExpr(node->children[1])) ? 1 : 0;
+		
+		case NTCOMPSUP:
+			return (evalExpr(node->children[0]) > evalExpr(node->children[1])) ? 1 : 0;
+
+		case NTPRINT:
+			printf("%lf\n", node->val);
+			return 0;
+
 		default:
 			printf("Error in evalInst ... Wrong node type: %s\n", node2String(node));
 			exit (1);

@@ -8,7 +8,9 @@ enum NodeType {
 	
 	NTSI 		= 10,
 	NTALORS		= 11,
-	NTSINON		= 12,	
+	NTSINON		= 12,
+
+	NTTANTQUE	= 20,
 
 	NTNUM   	= 201,
     NTVAR 		= 202,
@@ -25,8 +27,9 @@ enum NodeType {
     NTEGAL 		= 328,
 
     NTCOMPEGAL	= 350,
-    NTCOMPINF	= 351,
-    NTCOMPSUP	= 352,
+    NTCOMPDIFF	= 351,
+    NTCOMPINF	= 352,
+    NTCOMPSUP	= 353,
 
     NTPRINT		= 400
 };

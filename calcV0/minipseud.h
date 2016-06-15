@@ -47,15 +47,22 @@
      DIV = 263,
      POW = 264,
      EGAL = 265,
-     OP_PAR = 266,
-     CL_PAR = 267,
-     COLON = 268,
-     NEG = 269,
-     EOL = 270,
-     PRINT = 271,
-     SI = 272,
-     ALORS = 273,
-     SINON = 274
+     SI = 266,
+     ALORS = 267,
+     COMPEGAL = 268,
+     COMPDIFF = 269,
+     COMPINF = 270,
+     COMPSUP = 271,
+     TANTQUE = 272,
+     PRINT = 273,
+     OP_PAR = 274,
+     CL_PAR = 275,
+     COLON = 276,
+     SINON = 277,
+     FAIRE = 278,
+     NEG = 279,
+     EOL = 280,
+     FIN = 281
    };
 #endif
 /* Tokens.  */
@@ -67,15 +74,22 @@
 #define DIV 263
 #define POW 264
 #define EGAL 265
-#define OP_PAR 266
-#define CL_PAR 267
-#define COLON 268
-#define NEG 269
-#define EOL 270
-#define PRINT 271
-#define SI 272
-#define ALORS 273
-#define SINON 274
+#define SI 266
+#define ALORS 267
+#define COMPEGAL 268
+#define COMPDIFF 269
+#define COMPINF 270
+#define COMPSUP 271
+#define TANTQUE 272
+#define PRINT 273
+#define OP_PAR 274
+#define CL_PAR 275
+#define COLON 276
+#define SINON 277
+#define FAIRE 278
+#define NEG 279
+#define EOL 280
+#define FIN 281
 
 
 
@@ -87,7 +101,7 @@ typedef union YYSTYPE
 	struct Node *node;
 }
 /* Line 1529 of yacc.c.  */
-#line 91 "minipseud.tab.h"
+#line 105 "minipseud.tab.h"
 	YYSTYPE;
 # define yystype YYSTYPE /* obsolescent; will be withdrawn */
 # define YYSTYPE_IS_DECLARED 1
