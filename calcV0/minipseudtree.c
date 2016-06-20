@@ -3,27 +3,29 @@
 #include <stdio.h>
 #include "minipseudtree.h"
 
-# define PRINTTAB 2
+#define PRINTTAB 2
 
-Node* createNode(int type) {
-	Node* newnode = (Node *) malloc(sizeof(Node));
-	newnode->type = type;
-	newnode->children = NULL;
+Node *createNode(int type) {
+	Node *newnode 		= (Node *) malloc(sizeof(Node));
+	newnode->type 		= type;
+	newnode->children 	= NULL;
+
 	return newnode;
 }
 
-Node* nodeChildren(Node* father, Node *child1, Node *child2) { 
-	father->children = (Node **) malloc(sizeof(Node*) * 2);
+Node* nodeChildren(Node *father, Node *child1, Node *child2) { 
+	father->children 	= (Node **) malloc(sizeof(Node *) * 2);
 	father->children[0] = child1;
 	father->children[1] = child2;
+
 	return father;
 }
 
-const char* node2String(Node *node) {	
+const char *node2String(Node *node) {	
 	
 	char *res;
 	
-	switch ( node->type ) {
+	switch (node->type) {
 		case NTEMPTY:
 			return "NTEMPTY";
 
@@ -34,12 +36,12 @@ const char* node2String(Node *node) {
 			return "NTINST";
 
 	 	case NTNUM:
-			res = (char *)malloc(sizeof(char) * 32);
+			res = (char *) malloc(sizeof(char) * 32);
 			sprintf(res, "NTNUM -> %f", node->val);
 			return res;
 
 		case NTVAR:
-			res = (char*) malloc(sizeof(char) * 32);
+			res = (char *) malloc(sizeof(char) * 32);
 			sprintf(res, "NTVAR -> %s", node->var);
 			return res;
 	 
@@ -90,17 +92,20 @@ const char* node2String(Node *node) {
 	};
 }
 
-const char* makeSpaces(int depth, int fdepth) {
+const char *makeSpaces(int depth, int fdepth) {
 	int nbspaces = depth * PRINTTAB;	
-	char *spaces = (char *)malloc(sizeof(char) * nbspaces);
+	char *spaces = (char *) malloc(sizeof(char) * nbspaces);
+	
 	if (depth == fdepth)		
 		memset(spaces, ' ', nbspaces);
 	else {
-		int midspaces = fdepth * PRINTTAB;
-		int endline = (depth - fdepth) * PRINTTAB - 1;
+		int midspaces 	= fdepth * PRINTTAB;
+		int endline 	= (depth - fdepth) * PRINTTAB - 1;
+
 		memset(spaces, ' ', midspaces);
 		spaces[midspaces] = '\\';
-		char *tmpline =  (char *)malloc(sizeof(char) * endline);
+
+		char *tmpline =  (char *) malloc(sizeof(char) * endline);
 		memset(tmpline, '_', endline);
 		strcat(spaces, tmpline);
 		free(tmpline);
@@ -110,21 +115,20 @@ const char* makeSpaces(int depth, int fdepth) {
 
 void printGraphRecu(Node *node, int n) {
 	
-	if(!node) {
-		return;
-	}
-	
 	int i;
-	for ( i=0;i<n;i++) {
+
+	if (!node)
+		return;
+
+	for (i = 0; i < n; i++)
 		printf(" ");
-	}
 
 	printf("%s\n", node2String(node));
 	
 	// Hack : No children only if null or number or variable or PRINT
 	if ((node->children != NULL) && (node->type != NTNUM) && (node->type != NTVAR)) {
-		printGraphRecu(node->children[0], n+1);
-		printGraphRecu(node->children[1], n+1);
+		printGraphRecu(node->children[0], n + 1);
+		printGraphRecu(node->children[1], n + 1);
 	}
 }
 
@@ -139,7 +143,7 @@ void printGraphRec(Node *node, int depth, int fdepth) {
 	}
 }
 
-void printGraph(Node* root) {
+void printGraph(Node *root) {
 	printGraphRecu(root, 0);
 }
 

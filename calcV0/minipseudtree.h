@@ -39,18 +39,18 @@ enum NodeType {
 typedef struct Node {
 	enum NodeType type;
 	union { 
-		double val;
-		char* var;
-		struct Node** children;
-	} ;
+		double 	val;
+		char 	*var;
+		struct Node **children;
+	};
 } Node;
 
-Node* createNode(int type);
+Node *createNode(int);
 
-Node* nodeChildren(Node* father, Node *child1, Node *child2);
+Node *nodeChildren(Node *, Node *, Node *);
 
-const char* node2String(Node *node);
+const char *node2String(Node *);
 
-void printGraph(Node *root);
+void printGraph(Node *);
 
 #endif

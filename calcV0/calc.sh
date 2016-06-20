@@ -17,6 +17,6 @@ gcc -c minipseudeval.c -o minipseudeval.o
 gcc -c minipseudlist.c -o minipseudlist.o
 gcc -c minipseud.lex.c -o minipseud.lex.o
 gcc -c minipseud.y.c -o minipseud.y.o
-gcc -o minipseud minipseud.lex.o minipseud.y.o minipseudtree.o minipseudeval.o minipseudlist.o
+gcc -o minipseud minipseud.lex.o minipseud.y.o minipseudtree.o minipseudeval.o minipseudlist.o -lm
 ./minipseud -f in.txt
  

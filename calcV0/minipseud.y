@@ -62,29 +62,44 @@ Instlist:
 	;
 
 Inst:
-	VARIABLE EGAL Expr { $$=nodeChildren($2, $1, $3); }
-	| Expr { $$=$1; }
-	| PRINT OP_PAR Expr CL_PAR { $$=nodeChildren($1, $3, NULL); /*$$=$3; printf("%lf\n", eval($3, &list));*/ }
-	| SI OP_PAR Expr CL_PAR ALORS Instlist FIN { $$=nodeChildren($1, $3, $6); }
-	| SI OP_PAR Expr CL_PAR ALORS Instlist SINON Instlist FIN { $$=nodeChildren($1, $3, nodeChildren($5, $6, $8)); }
-	| TANTQUE OP_PAR Expr CL_PAR FAIRE Instlist FIN { $$=nodeChildren($1, $3, $6); }
-	| FOR OP_PAR Inst COLON Expr COLON Inst CL_PAR FAIRE Instlist FIN { printf("coucou\n"); $$=nodeChildren($1, nodeChildren(createNode(NTFORTRAIT), $3, $5), nodeChildren(createNode(NTFORTRAIT), $7, $10)); }
+	VARIABLE EGAL Expr {
+		$$ = nodeChildren($2, $1, $3);
+	}
+	| Expr {
+		$$ = $1;
+	}
+	| PRINT OP_PAR Expr CL_PAR { 
+		$$ = nodeChildren($1, $3, NULL);
+		/*$$ = $3; printf("%lf\n", eval($3, &list));*/
+	}
+	| SI OP_PAR Expr CL_PAR ALORS Instlist FIN {
+		$$ = nodeChildren($1, $3, $6);
+	}
+	| SI OP_PAR Expr CL_PAR ALORS Instlist SINON Instlist FIN {
+		$$ = nodeChildren($1, $3, nodeChildren($5, $6, $8));
+	}
+	| TANTQUE OP_PAR Expr CL_PAR FAIRE Instlist FIN {
+		$$ = nodeChildren($1, $3, $6);
+	}
+	| FOR OP_PAR Inst COLON Expr COLON Inst CL_PAR FAIRE Instlist FIN {
+		$$ = nodeChildren($1, nodeChildren(createNode(NTFORTRAIT), $3, $5), nodeChildren(createNode(NTFORTRAIT), $7, $10));
+	}
 	;
 
 Expr:
-	NUM						{ $$=$1; }
-	| VARIABLE 				{ $$=$1; }
-	| Expr PLUS Expr     	{ $$=nodeChildren($2, $1, $3); }
-	| Expr MIN Expr      	{ $$=nodeChildren($2, $1, $3); }
-	| Expr MULT Expr     	{ $$=nodeChildren($2, $1, $3); }
-	| Expr DIV Expr      	{ $$=nodeChildren($2, $1, $3); }
-	| MIN Expr %prec NEG 	{ Node* moinsUn = createNode(NTNUM); moinsUn->val = -1; $$=nodeChildren(createNode(NTMULT), moinsUn, $2); }
-	| Expr POW Expr      	{ $$=nodeChildren($2, $1, $3); }
-	| OP_PAR Expr CL_PAR 	{ $$=$2; }
-	| Expr COMPEGAL	Expr	{ $$=nodeChildren($2, $1, $3); }
-	| Expr COMPDIFF	Expr	{ $$=nodeChildren($2, $1, $3); }
-	| Expr COMPINF Expr		{ $$=nodeChildren($2, $1, $3); }
-	| Expr COMPSUP Expr		{ $$=nodeChildren($2, $1, $3); }
+	NUM						{ $$ = $1; }
+	| VARIABLE 				{ $$ = $1; }
+	| Expr PLUS Expr     	{ $$ = nodeChildren($2, $1, $3); }
+	| Expr MIN Expr      	{ $$ = nodeChildren($2, $1, $3); }
+	| Expr MULT Expr     	{ $$ = nodeChildren($2, $1, $3); }
+	| Expr DIV Expr      	{ $$ = nodeChildren($2, $1, $3); }
+	| MIN Expr %prec NEG 	{ Node *moinsUn = createNode(NTNUM); moinsUn->val = -1; $$ = nodeChildren(createNode(NTMULT), moinsUn, $2); }
+	| Expr POW Expr      	{ $$ = nodeChildren($2, $1, $3); }
+	| OP_PAR Expr CL_PAR 	{ $$ = $2; }
+	| Expr COMPEGAL	Expr	{ $$ = nodeChildren($2, $1, $3); }
+	| Expr COMPDIFF	Expr	{ $$ = nodeChildren($2, $1, $3); }
+	| Expr COMPINF Expr		{ $$ = nodeChildren($2, $1, $3); }
+	| Expr COMPSUP Expr		{ $$ = nodeChildren($2, $1, $3); }
 	;
 %%
 
@@ -100,13 +115,14 @@ int yyerror(char *s) {
 int main(int arc, char **argv) {
 
 	if ((arc == 3) && (strcmp(argv[1], "-f") == 0)) {
-		FILE *fp=fopen(argv[2],"r");
-		if(!fp) {
+		FILE *fp = fopen(argv[2],"r");
+		
+		if (!fp) {
 			printf("Impossible d'ouvrir le fichier à executer.\n");
 			exit(0);
 		}
 
-		yyin=fp;
+		yyin = fp;
 		yyparse();
 		fclose(fp);
 	}

@@ -6,13 +6,14 @@
 #include "minipseudtree.h"
 #include "minipseudlist.h"
 
-int printDepth = 0;
-int funcDepth = 0;
+int printDepth 	= 0;
+int funcDepth 	= 0;
 
-t_list_chain** listVar = NULL;
+t_list_chain **listVar = NULL;
 
 double evalExpr(Node *node) {
-	switch ( node->type ) {
+	
+	switch (node->type) {
 		case NTEMPTY:
 			return 0.0;
 		case NTNUM:
@@ -37,15 +38,18 @@ double evalExpr(Node *node) {
 }
 
 
-double evalInst(Node* node) {
+double evalInst(Node *node) {
 	double value;
-	switch ( node->type ) {
+
+	switch (node->type) {
 		case NTEMPTY:
 			return 0.0;
+
 		case NTINSTLIST:
 			evalInst(node->children[0]);
 			evalInst(node->children[1]);
 			return 0.0;
+
 		case NTNUM:
 		case NTVAR:
 		case NTPLUS:
@@ -65,30 +69,26 @@ double evalInst(Node* node) {
 
 		case NTSI:
 			// SI ... ALORS ... SINON
-			if(node->children[1]->type == NTALORS) {
-				if(evalInst(node->children[0]) != 0) {
+			if (node->children[1]->type == NTALORS) {
+				if (evalInst(node->children[0]) != 0)
 					evalInst(node->children[1]->children[0]);
-				} else {
+				else
 					evalInst(node->children[1]->children[1]);
-				}
 			} else {
 				// SI ... ALORS ...
-				if(evalInst(node->children[0]) != 0) {
+				if (evalInst(node->children[0]) != 0)
 					evalInst(node->children[1]);
-				}
 			}
 			return 0;
 
 		case NTTANTQUE:
-			while(evalInst(node->children[0]) != 0) {
+			while (evalInst(node->children[0]) != 0)
 				evalInst(node->children[1]);
-			}
 			return 0;
 
 		case NTFOR:
-			for(evalInst(node->children[0]->children[0]); evalInst(node->children[0]->children[1]) != 0; evalInst(node->children[1]->children[0])) {
+			for(evalInst(node->children[0]->children[0]); evalInst(node->children[0]->children[1]) != 0; evalInst(node->children[1]->children[0]))
 				evalInst(node->children[1]->children[1]);
-			}
 			return 0;
 
 		case NTCOMPEGAL:
@@ -113,7 +113,7 @@ double evalInst(Node* node) {
 	};
 }
 
-double eval(Node *node, t_list_chain** list) {
+double eval(Node *node, t_list_chain **list) {
 	listVar = list;
 	return evalInst(node);
 }
