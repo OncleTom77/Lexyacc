@@ -1,107 +1,137 @@
 %option noyywrap
+
 %{
-
-#include "minipseud.h"
-#include <stdlib.h>
-#include "minipseudtree.h"
-
+	#include "includes.h"
 %}
 
-empty 		[ \t]+
+empty		[ \t]+
 
-num 		[0-9]
+num			[0-9]
 int			{num}+
-exp 		[eE][+-]?{int}
+exp			[eE][+-]?{int}
 
-real    	{int}("."{int})?{exp}?
+real		{int}("."{int})?{exp}?
 
-variable 	[a-zA-Z]+
+variable	[a-zA-Z]+
 
 %%
 
 {empty}  { /* Nothing */ }
 
 {real} {
-    yylval.node = createNode(NTNUM);
-    yylval.node->val = atof(yytext);
-    return(NUM);
+	yylval.node 		= create_node(NTNUM);
+	yylval.node->val 	= atof(yytext);
+	return NUM;
 }
 
 == {
-	yylval.node = createNode(NTCOMPEGAL);
-	return(COMPEGAL);
+	yylval.node = create_node(NTCOMPEGAL);
+	return COMPEGAL;
 }
 
 != {
-	yylval.node = createNode(NTCOMPDIFF);
-	return(COMPDIFF);
+	yylval.node = create_node(NTCOMPDIFF);
+	return COMPDIFF;
 }
 
 "<" {
-	yylval.node = createNode(NTCOMPINF);
-	return(COMPINF);
+	yylval.node = create_node(NTCOMPINF);
+	return COMPINF;
 }
 
 ">" {
-	yylval.node = createNode(NTCOMPSUP);
-	return(COMPSUP);
+	yylval.node = create_node(NTCOMPSUP);
+	return COMPSUP;
 }
 
 TANTQUE {
-	yylval.node = createNode(NTTANTQUE);
-	return(TANTQUE);
+	yylval.node = create_node(NTTANTQUE);
+	return TANTQUE;
 }
 
 FOR {
-	yylval.node = createNode(NTFOR);
-	return(FOR);
+	yylval.node = create_node(NTFOR);
+	return FOR;
 }
 
 FAIRE {
-	return(FAIRE);
+	return FAIRE;
 }
 
 FIN {
-	return(FIN);
+	return FIN;
 }
 
 SI {
-	yylval.node = createNode(NTSI);
-	return(SI);
+	yylval.node = create_node(NTSI);
+	return SI;
 }
 
 ALORS {
-	yylval.node = createNode(NTALORS);
-	return(ALORS);
+	yylval.node = create_node(NTALORS);
+	return ALORS;
 }
 
 SINON {
-	return(SINON);
+	return SINON;
 }
 
 PRINT {
-	yylval.node = createNode(NTPRINT);
-	return(PRINT);
+	yylval.node = create_node(NTPRINT);
+	return PRINT;
 }
 
 {variable} {
-	yylval.node = createNode(NTVAR);
-	yylval.node->var = (char*) strdup(yytext);
-	return(VARIABLE);
+	yylval.node 		= create_node(NTVAR);
+	yylval.node->var 	= strdup(yytext);
+	return VARIABLE;
 }
 
 
-"("   	return(OP_PAR);
-")"   	return(CL_PAR);
+"(" {
+	return OP_PAR;
+}
 
-"+"   	{ yylval.node = createNode(NTPLUS); return(PLUS); }
-"-"   	{ yylval.node = createNode(NTMIN); return(MIN); }
-"*"   	{ yylval.node = createNode(NTMULT); return(MULT); }
-"/"   	{ yylval.node = createNode(NTDIV); return(DIV); }
-"^"   	{ yylval.node = createNode(NTPOW); return(POW); }
+")" {
+	return CL_PAR;
+}
 
-"="   	{ yylval.node = createNode(NTEGAL); return(EGAL); } 
+"+" {
+	yylval.node = create_node(NTPLUS);
+	return PLUS;
+}
 
-";"   	{ return(COLON); }
+"-" {
+	yylval.node = create_node(NTMIN);
+	return MIN;
+}
 
-"\n"  	{ return(EOL); }
+"*" {
+	yylval.node = create_node(NTMULT);
+	return MULT;
+}
+
+"/" {
+	yylval.node = create_node(NTDIV);
+	return DIV;
+}
+
+"^" {
+	yylval.node = create_node(NTPOW);
+	return POW;
+}
+
+"=" {
+	yylval.node = create_node(NTEGAL);
+	return EGAL;
+} 
+
+";" {
+	return COLON;
+}
+
+"\n" {
+	return EOL;
+}
+
+%%

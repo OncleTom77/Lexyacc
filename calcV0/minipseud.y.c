@@ -64,20 +64,14 @@
 /* Copy the first part of user declarations.  */
 #line 1 "minipseud.y" /* yacc.c:339  */
 
-	#include <stdio.h>
-	#include <stdlib.h>
-	#include <string.h>
-	#include <math.h>
-	#include "minipseudtree.h"
-	#include "minipseudeval.h"
-	#include "minipseudlist.h"
+	#include "includes.h"
 
-	extern int  yyparse();
+	extern int	yyparse();
 	extern FILE *yyin;
 
-	t_list_chain* list = NULL;
+	t_list_chain *list = NULL;
 
-#line 81 "minipseud.tab.c" /* yacc.c:339  */
+#line 75 "minipseud.tab.c" /* yacc.c:339  */
 
 # ifndef YY_NULLPTR
 #  if defined __cplusplus && 201103L <= __cplusplus
@@ -145,11 +139,11 @@ extern int yydebug;
 typedef union YYSTYPE YYSTYPE;
 union YYSTYPE
 {
-#line 16 "minipseud.y" /* yacc.c:355  */
+#line 10 "minipseud.y" /* yacc.c:355  */
 
 	struct Node *node;
 
-#line 153 "minipseud.tab.c" /* yacc.c:355  */
+#line 147 "minipseud.tab.c" /* yacc.c:355  */
 };
 # define YYSTYPE_IS_TRIVIAL 1
 # define YYSTYPE_IS_DECLARED 1
@@ -164,7 +158,7 @@ int yyparse (void);
 
 /* Copy the second part of user declarations.  */
 
-#line 168 "minipseud.tab.c" /* yacc.c:358  */
+#line 162 "minipseud.tab.c" /* yacc.c:358  */
 
 #ifdef short
 # undef short
@@ -464,9 +458,9 @@ static const yytype_uint8 yytranslate[] =
   /* YYRLINE[YYN] -- Source line where rule number YYN was defined.  */
 static const yytype_uint8 yyrline[] =
 {
-       0,    49,    49,    50,    55,    56,    60,    61,    65,    68,
-      71,    75,    78,    81,    84,    90,    91,    92,    93,    94,
-      95,    96,    97,    98,    99,   100,   101,   102
+       0,    40,    40,    41,    46,    47,    53,    57,    63,    67,
+      71,    77,    81,    85,    89,    99,   103,   107,   111,   115,
+     119,   123,   128,   132,   136,   140,   144,   148
 };
 #endif
 
@@ -1308,178 +1302,216 @@ yyreduce:
   switch (yyn)
     {
         case 2:
-#line 49 "minipseud.y" /* yacc.c:1646  */
-    {/* Nothing ... */ }
-#line 1314 "minipseud.tab.c" /* yacc.c:1646  */
+#line 40 "minipseud.y" /* yacc.c:1646  */
+    { /* Nothing ... */ }
+#line 1308 "minipseud.tab.c" /* yacc.c:1646  */
     break;
 
   case 3:
-#line 50 "minipseud.y" /* yacc.c:1646  */
+#line 41 "minipseud.y" /* yacc.c:1646  */
     { /* Nothing ... */ }
-#line 1320 "minipseud.tab.c" /* yacc.c:1646  */
+#line 1314 "minipseud.tab.c" /* yacc.c:1646  */
     break;
 
   case 4:
-#line 55 "minipseud.y" /* yacc.c:1646  */
-    {  }
-#line 1326 "minipseud.tab.c" /* yacc.c:1646  */
+#line 46 "minipseud.y" /* yacc.c:1646  */
+    { }
+#line 1320 "minipseud.tab.c" /* yacc.c:1646  */
     break;
 
   case 5:
-#line 56 "minipseud.y" /* yacc.c:1646  */
-    { exec((yyvsp[-1].node)); }
-#line 1332 "minipseud.tab.c" /* yacc.c:1646  */
+#line 47 "minipseud.y" /* yacc.c:1646  */
+    {
+			exec((yyvsp[-1].node));
+		}
+#line 1328 "minipseud.tab.c" /* yacc.c:1646  */
     break;
 
   case 6:
-#line 60 "minipseud.y" /* yacc.c:1646  */
-    { (yyval.node)=(yyvsp[-1].node); }
-#line 1338 "minipseud.tab.c" /* yacc.c:1646  */
+#line 53 "minipseud.y" /* yacc.c:1646  */
+    {
+			(yyval.node) = (yyvsp[-1].node);
+		}
+#line 1336 "minipseud.tab.c" /* yacc.c:1646  */
     break;
 
   case 7:
-#line 61 "minipseud.y" /* yacc.c:1646  */
-    { (yyval.node)=nodeChildren(createNode(NTINSTLIST), (yyvsp[-2].node), (yyvsp[-1].node)); }
+#line 57 "minipseud.y" /* yacc.c:1646  */
+    {
+			(yyval.node) = add_children_to_node(create_node(NTINSTLIST), (yyvsp[-2].node), (yyvsp[-1].node));
+		}
 #line 1344 "minipseud.tab.c" /* yacc.c:1646  */
     break;
 
   case 8:
-#line 65 "minipseud.y" /* yacc.c:1646  */
+#line 63 "minipseud.y" /* yacc.c:1646  */
     {
-		(yyval.node) = nodeChildren((yyvsp[-1].node), (yyvsp[-2].node), (yyvsp[0].node));
-	}
+			(yyval.node) = add_children_to_node((yyvsp[-1].node), (yyvsp[-2].node), (yyvsp[0].node));
+		}
 #line 1352 "minipseud.tab.c" /* yacc.c:1646  */
     break;
 
   case 9:
-#line 68 "minipseud.y" /* yacc.c:1646  */
+#line 67 "minipseud.y" /* yacc.c:1646  */
     {
-		(yyval.node) = (yyvsp[0].node);
-	}
+			(yyval.node) = (yyvsp[0].node);
+		}
 #line 1360 "minipseud.tab.c" /* yacc.c:1646  */
     break;
 
   case 10:
 #line 71 "minipseud.y" /* yacc.c:1646  */
     { 
-		(yyval.node) = nodeChildren((yyvsp[-3].node), (yyvsp[-1].node), NULL);
-		/*$$ = $3; printf("%lf\n", eval($3, &list));*/
-	}
-#line 1369 "minipseud.tab.c" /* yacc.c:1646  */
+			(yyval.node) = add_children_to_node((yyvsp[-3].node), (yyvsp[-1].node), NULL);
+			/*$$ = $3;
+			printf("%lf\n", eval($3, &list));*/
+		}
+#line 1370 "minipseud.tab.c" /* yacc.c:1646  */
     break;
 
   case 11:
-#line 75 "minipseud.y" /* yacc.c:1646  */
+#line 77 "minipseud.y" /* yacc.c:1646  */
     {
-		(yyval.node) = nodeChildren((yyvsp[-6].node), (yyvsp[-4].node), (yyvsp[-1].node));
-	}
-#line 1377 "minipseud.tab.c" /* yacc.c:1646  */
+			(yyval.node) = add_children_to_node((yyvsp[-6].node), (yyvsp[-4].node), (yyvsp[-1].node));
+		}
+#line 1378 "minipseud.tab.c" /* yacc.c:1646  */
     break;
 
   case 12:
-#line 78 "minipseud.y" /* yacc.c:1646  */
+#line 81 "minipseud.y" /* yacc.c:1646  */
     {
-		(yyval.node) = nodeChildren((yyvsp[-8].node), (yyvsp[-6].node), nodeChildren((yyvsp[-4].node), (yyvsp[-3].node), (yyvsp[-1].node)));
-	}
-#line 1385 "minipseud.tab.c" /* yacc.c:1646  */
+			(yyval.node) = add_children_to_node((yyvsp[-8].node), (yyvsp[-6].node), add_children_to_node((yyvsp[-4].node), (yyvsp[-3].node), (yyvsp[-1].node)));
+		}
+#line 1386 "minipseud.tab.c" /* yacc.c:1646  */
     break;
 
   case 13:
-#line 81 "minipseud.y" /* yacc.c:1646  */
+#line 85 "minipseud.y" /* yacc.c:1646  */
     {
-		(yyval.node) = nodeChildren((yyvsp[-6].node), (yyvsp[-4].node), (yyvsp[-1].node));
-	}
-#line 1393 "minipseud.tab.c" /* yacc.c:1646  */
+			(yyval.node) = add_children_to_node((yyvsp[-6].node), (yyvsp[-4].node), (yyvsp[-1].node));
+		}
+#line 1394 "minipseud.tab.c" /* yacc.c:1646  */
     break;
 
   case 14:
-#line 84 "minipseud.y" /* yacc.c:1646  */
+#line 89 "minipseud.y" /* yacc.c:1646  */
     {
-		(yyval.node) = nodeChildren((yyvsp[-10].node), nodeChildren(createNode(NTFORTRAIT), (yyvsp[-8].node), (yyvsp[-6].node)), nodeChildren(createNode(NTFORTRAIT), (yyvsp[-4].node), (yyvsp[-1].node)));
-	}
-#line 1401 "minipseud.tab.c" /* yacc.c:1646  */
+			(yyval.node) = add_children_to_node(
+					(yyvsp[-10].node),
+					add_children_to_node(create_node(NTFORTRAIT), (yyvsp[-8].node), (yyvsp[-6].node)),
+					add_children_to_node(create_node(NTFORTRAIT), (yyvsp[-4].node), (yyvsp[-1].node))
+				);
+		}
+#line 1406 "minipseud.tab.c" /* yacc.c:1646  */
     break;
 
   case 15:
-#line 90 "minipseud.y" /* yacc.c:1646  */
-    { (yyval.node) = (yyvsp[0].node); }
-#line 1407 "minipseud.tab.c" /* yacc.c:1646  */
+#line 99 "minipseud.y" /* yacc.c:1646  */
+    {
+			(yyval.node) = (yyvsp[0].node);
+		}
+#line 1414 "minipseud.tab.c" /* yacc.c:1646  */
     break;
 
   case 16:
-#line 91 "minipseud.y" /* yacc.c:1646  */
-    { (yyval.node) = (yyvsp[0].node); }
-#line 1413 "minipseud.tab.c" /* yacc.c:1646  */
+#line 103 "minipseud.y" /* yacc.c:1646  */
+    {
+			(yyval.node) = (yyvsp[0].node);
+		}
+#line 1422 "minipseud.tab.c" /* yacc.c:1646  */
     break;
 
   case 17:
-#line 92 "minipseud.y" /* yacc.c:1646  */
-    { (yyval.node) = nodeChildren((yyvsp[-1].node), (yyvsp[-2].node), (yyvsp[0].node)); }
-#line 1419 "minipseud.tab.c" /* yacc.c:1646  */
+#line 107 "minipseud.y" /* yacc.c:1646  */
+    {
+			(yyval.node) = add_children_to_node((yyvsp[-1].node), (yyvsp[-2].node), (yyvsp[0].node));
+		}
+#line 1430 "minipseud.tab.c" /* yacc.c:1646  */
     break;
 
   case 18:
-#line 93 "minipseud.y" /* yacc.c:1646  */
-    { (yyval.node) = nodeChildren((yyvsp[-1].node), (yyvsp[-2].node), (yyvsp[0].node)); }
-#line 1425 "minipseud.tab.c" /* yacc.c:1646  */
+#line 111 "minipseud.y" /* yacc.c:1646  */
+    {
+			(yyval.node) = add_children_to_node((yyvsp[-1].node), (yyvsp[-2].node), (yyvsp[0].node));
+		}
+#line 1438 "minipseud.tab.c" /* yacc.c:1646  */
     break;
 
   case 19:
-#line 94 "minipseud.y" /* yacc.c:1646  */
-    { (yyval.node) = nodeChildren((yyvsp[-1].node), (yyvsp[-2].node), (yyvsp[0].node)); }
-#line 1431 "minipseud.tab.c" /* yacc.c:1646  */
+#line 115 "minipseud.y" /* yacc.c:1646  */
+    {
+			(yyval.node) = add_children_to_node((yyvsp[-1].node), (yyvsp[-2].node), (yyvsp[0].node));
+		}
+#line 1446 "minipseud.tab.c" /* yacc.c:1646  */
     break;
 
   case 20:
-#line 95 "minipseud.y" /* yacc.c:1646  */
-    { (yyval.node) = nodeChildren((yyvsp[-1].node), (yyvsp[-2].node), (yyvsp[0].node)); }
-#line 1437 "minipseud.tab.c" /* yacc.c:1646  */
+#line 119 "minipseud.y" /* yacc.c:1646  */
+    {
+			(yyval.node) = add_children_to_node((yyvsp[-1].node), (yyvsp[-2].node), (yyvsp[0].node));
+		}
+#line 1454 "minipseud.tab.c" /* yacc.c:1646  */
     break;
 
   case 21:
-#line 96 "minipseud.y" /* yacc.c:1646  */
-    { Node *moinsUn = createNode(NTNUM); moinsUn->val = -1; (yyval.node) = nodeChildren(createNode(NTMULT), moinsUn, (yyvsp[0].node)); }
-#line 1443 "minipseud.tab.c" /* yacc.c:1646  */
+#line 123 "minipseud.y" /* yacc.c:1646  */
+    {
+			Node *moinsUn = create_node(NTNUM); moinsUn->val = -1;
+			(yyval.node) = add_children_to_node(create_node(NTMULT), moinsUn, (yyvsp[0].node));
+		}
+#line 1463 "minipseud.tab.c" /* yacc.c:1646  */
     break;
 
   case 22:
-#line 97 "minipseud.y" /* yacc.c:1646  */
-    { (yyval.node) = nodeChildren((yyvsp[-1].node), (yyvsp[-2].node), (yyvsp[0].node)); }
-#line 1449 "minipseud.tab.c" /* yacc.c:1646  */
+#line 128 "minipseud.y" /* yacc.c:1646  */
+    {
+			(yyval.node) = add_children_to_node((yyvsp[-1].node), (yyvsp[-2].node), (yyvsp[0].node));
+		}
+#line 1471 "minipseud.tab.c" /* yacc.c:1646  */
     break;
 
   case 23:
-#line 98 "minipseud.y" /* yacc.c:1646  */
-    { (yyval.node) = (yyvsp[-1].node); }
-#line 1455 "minipseud.tab.c" /* yacc.c:1646  */
-    break;
-
-  case 24:
-#line 99 "minipseud.y" /* yacc.c:1646  */
-    { (yyval.node) = nodeChildren((yyvsp[-1].node), (yyvsp[-2].node), (yyvsp[0].node)); }
-#line 1461 "minipseud.tab.c" /* yacc.c:1646  */
-    break;
-
-  case 25:
-#line 100 "minipseud.y" /* yacc.c:1646  */
-    { (yyval.node) = nodeChildren((yyvsp[-1].node), (yyvsp[-2].node), (yyvsp[0].node)); }
-#line 1467 "minipseud.tab.c" /* yacc.c:1646  */
-    break;
-
-  case 26:
-#line 101 "minipseud.y" /* yacc.c:1646  */
-    { (yyval.node) = nodeChildren((yyvsp[-1].node), (yyvsp[-2].node), (yyvsp[0].node)); }
-#line 1473 "minipseud.tab.c" /* yacc.c:1646  */
-    break;
-
-  case 27:
-#line 102 "minipseud.y" /* yacc.c:1646  */
-    { (yyval.node) = nodeChildren((yyvsp[-1].node), (yyvsp[-2].node), (yyvsp[0].node)); }
+#line 132 "minipseud.y" /* yacc.c:1646  */
+    {
+			(yyval.node) = (yyvsp[-1].node);
+		}
 #line 1479 "minipseud.tab.c" /* yacc.c:1646  */
     break;
 
+  case 24:
+#line 136 "minipseud.y" /* yacc.c:1646  */
+    {
+			(yyval.node) = add_children_to_node((yyvsp[-1].node), (yyvsp[-2].node), (yyvsp[0].node));
+		}
+#line 1487 "minipseud.tab.c" /* yacc.c:1646  */
+    break;
 
-#line 1483 "minipseud.tab.c" /* yacc.c:1646  */
+  case 25:
+#line 140 "minipseud.y" /* yacc.c:1646  */
+    {
+			(yyval.node) = add_children_to_node((yyvsp[-1].node), (yyvsp[-2].node), (yyvsp[0].node));
+		}
+#line 1495 "minipseud.tab.c" /* yacc.c:1646  */
+    break;
+
+  case 26:
+#line 144 "minipseud.y" /* yacc.c:1646  */
+    {
+			(yyval.node) = add_children_to_node((yyvsp[-1].node), (yyvsp[-2].node), (yyvsp[0].node));
+		}
+#line 1503 "minipseud.tab.c" /* yacc.c:1646  */
+    break;
+
+  case 27:
+#line 148 "minipseud.y" /* yacc.c:1646  */
+    {
+			(yyval.node) = add_children_to_node((yyvsp[-1].node), (yyvsp[-2].node), (yyvsp[0].node));
+		}
+#line 1511 "minipseud.tab.c" /* yacc.c:1646  */
+    break;
+
+
+#line 1515 "minipseud.tab.c" /* yacc.c:1646  */
       default: break;
     }
   /* User semantic actions sometimes alter yychar, and that requires
@@ -1707,11 +1739,11 @@ yyreturn:
 #endif
   return yyresult;
 }
-#line 104 "minipseud.y" /* yacc.c:1906  */
+#line 152 "minipseud.y" /* yacc.c:1906  */
 
 
 int exec(Node *node) {
-	printGraph(node);
+	print_graph(node);
 	eval(node, &list);
 }
 
@@ -1726,12 +1758,13 @@ int main(int arc, char **argv) {
 		
 		if (!fp) {
 			printf("Impossible d'ouvrir le fichier à executer.\n");
-			exit(0);
+			return EXIT_FAILURE;
 		}
 
 		yyin = fp;
 		yyparse();
 		fclose(fp);
 	}
-	exit(0);
+
+	return EXIT_SUCCESS;
 }

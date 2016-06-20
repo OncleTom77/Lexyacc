@@ -78,7 +78,7 @@ extern int yydebug;
 typedef union YYSTYPE YYSTYPE;
 union YYSTYPE
 {
-#line 16 "minipseud.y" /* yacc.c:1909  */
+#line 10 "minipseud.y" /* yacc.c:1909  */
 
 	struct Node *node;
 

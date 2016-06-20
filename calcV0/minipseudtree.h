@@ -1,6 +1,6 @@
 #ifndef MINIPSEUDTREE
-# define MINIPSEUDTREE
-    
+#define MINIPSEUDTREE
+
 enum NodeType {
 	NTEMPTY 	= 0,
 	NTINSTLIST 	= 1,
@@ -15,27 +15,27 @@ enum NodeType {
 	NTFORTRAIT	= 22,
 
 	NTNUM   	= 201,
-    NTVAR 		= 202,
-	
+	NTVAR 		= 202,
+
 
 	NTPLUS  	= 321,
 	NTMIN   	= 322,
 	NTMULT  	= 323,
 	NTDIV   	= 324,
 	NTPOW   	= 325,
-    NTPARG 		= 326,
-    NTPARD 		= 327,
+	NTPARG 		= 326,
+	NTPARD 		= 327,
 
-    NTEGAL 		= 328,
+	NTEGAL 		= 328,
 
-    NTCOMPEGAL	= 350,
-    NTCOMPDIFF	= 351,
-    NTCOMPINF	= 352,
-    NTCOMPSUP	= 353,
+	NTCOMPEGAL	= 350,
+	NTCOMPDIFF	= 351,
+	NTCOMPINF	= 352,
+	NTCOMPSUP	= 353,
 
-    NTPRINT		= 400
+	NTPRINT		= 400
 };
-   
+
 typedef struct Node {
 	enum NodeType type;
 	union { 
@@ -45,12 +45,14 @@ typedef struct Node {
 	};
 } Node;
 
-Node *createNode(int);
+Node *create_node(int);
 
-Node *nodeChildren(Node *, Node *, Node *);
+Node *add_children_to_node(Node *, Node *, Node *);
 
-const char *node2String(Node *);
+const char *node_to_string(Node *);
 
-void printGraph(Node *);
+void recursive_graph(Node *, int);
+
+void print_graph(Node *);
 
 #endif

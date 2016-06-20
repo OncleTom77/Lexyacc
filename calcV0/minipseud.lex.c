@@ -338,6 +338,8 @@ void yyfree (void *  );
 
 #define YY_AT_BOL() (YY_CURRENT_BUFFER_LVALUE->yy_at_bol)
 
+/* Begin user sect3 */
+
 #define yywrap(n) 1
 #define YY_SKIP_YYWRAP
 
@@ -500,13 +502,9 @@ int yy_flex_debug = 0;
 #define YY_RESTORE_YY_MORE_OFFSET
 char *yytext;
 #line 1 "minipseud.l"
-#line 3 "minipseud.l"
-
-#include "minipseud.h"
-#include <stdlib.h>
-#include "minipseudtree.h"
-
-#line 510 "lex.yy.c"
+#line 4 "minipseud.l"
+	#include "includes.h"
+#line 508 "lex.yy.c"
 
 #define INITIAL 0
 
@@ -693,10 +691,10 @@ YY_DECL
 	register char *yy_cp, *yy_bp;
 	register int yy_act;
     
-#line 20 "minipseud.l"
+#line 17 "minipseud.l"
 
 
-#line 700 "lex.yy.c"
+#line 698 "lex.yy.c"
 
 	if ( !(yy_init) )
 		{
@@ -781,177 +779,203 @@ do_action:	/* This label is used only to access EOF actions. */
 
 case 1:
 YY_RULE_SETUP
-#line 22 "minipseud.l"
+#line 19 "minipseud.l"
 { /* Nothing */ }
 	YY_BREAK
 case 2:
 YY_RULE_SETUP
-#line 24 "minipseud.l"
+#line 21 "minipseud.l"
 {
-    yylval.node = createNode(NTNUM);
-    yylval.node->val = atof(yytext);
-    return(NUM);
+	yylval.node 		= create_node(NTNUM);
+	yylval.node->val 	= atof(yytext);
+	return NUM;
 }
 	YY_BREAK
 case 3:
 YY_RULE_SETUP
-#line 30 "minipseud.l"
+#line 27 "minipseud.l"
 {
-	yylval.node = createNode(NTCOMPEGAL);
-	return(COMPEGAL);
+	yylval.node = create_node(NTCOMPEGAL);
+	return COMPEGAL;
 }
 	YY_BREAK
 case 4:
 YY_RULE_SETUP
-#line 35 "minipseud.l"
+#line 32 "minipseud.l"
 {
-	yylval.node = createNode(NTCOMPDIFF);
-	return(COMPDIFF);
+	yylval.node = create_node(NTCOMPDIFF);
+	return COMPDIFF;
 }
 	YY_BREAK
 case 5:
 YY_RULE_SETUP
-#line 40 "minipseud.l"
+#line 37 "minipseud.l"
 {
-	yylval.node = createNode(NTCOMPINF);
-	return(COMPINF);
+	yylval.node = create_node(NTCOMPINF);
+	return COMPINF;
 }
 	YY_BREAK
 case 6:
 YY_RULE_SETUP
-#line 45 "minipseud.l"
+#line 42 "minipseud.l"
 {
-	yylval.node = createNode(NTCOMPSUP);
-	return(COMPSUP);
+	yylval.node = create_node(NTCOMPSUP);
+	return COMPSUP;
 }
 	YY_BREAK
 case 7:
 YY_RULE_SETUP
-#line 50 "minipseud.l"
+#line 47 "minipseud.l"
 {
-	yylval.node = createNode(NTTANTQUE);
-	return(TANTQUE);
+	yylval.node = create_node(NTTANTQUE);
+	return TANTQUE;
 }
 	YY_BREAK
 case 8:
 YY_RULE_SETUP
-#line 55 "minipseud.l"
+#line 52 "minipseud.l"
 {
-	yylval.node = createNode(NTFOR);
-	return(FOR);
+	yylval.node = create_node(NTFOR);
+	return FOR;
 }
 	YY_BREAK
 case 9:
 YY_RULE_SETUP
-#line 60 "minipseud.l"
+#line 57 "minipseud.l"
 {
-	return(FAIRE);
+	return FAIRE;
 }
 	YY_BREAK
 case 10:
 YY_RULE_SETUP
-#line 64 "minipseud.l"
+#line 61 "minipseud.l"
 {
-	return(FIN);
+	return FIN;
 }
 	YY_BREAK
 case 11:
 YY_RULE_SETUP
-#line 68 "minipseud.l"
+#line 65 "minipseud.l"
 {
-	yylval.node = createNode(NTSI);
-	return(SI);
+	yylval.node = create_node(NTSI);
+	return SI;
 }
 	YY_BREAK
 case 12:
 YY_RULE_SETUP
-#line 73 "minipseud.l"
+#line 70 "minipseud.l"
 {
-	yylval.node = createNode(NTALORS);
-	return(ALORS);
+	yylval.node = create_node(NTALORS);
+	return ALORS;
 }
 	YY_BREAK
 case 13:
 YY_RULE_SETUP
-#line 78 "minipseud.l"
+#line 75 "minipseud.l"
 {
-	return(SINON);
+	return SINON;
 }
 	YY_BREAK
 case 14:
 YY_RULE_SETUP
-#line 82 "minipseud.l"
+#line 79 "minipseud.l"
 {
-	yylval.node = createNode(NTPRINT);
-	return(PRINT);
+	yylval.node = create_node(NTPRINT);
+	return PRINT;
 }
 	YY_BREAK
 case 15:
 YY_RULE_SETUP
-#line 87 "minipseud.l"
+#line 84 "minipseud.l"
 {
-	yylval.node = createNode(NTVAR);
-	yylval.node->var = (char*) strdup(yytext);
-	return(VARIABLE);
+	yylval.node 		= create_node(NTVAR);
+	yylval.node->var 	= strdup(yytext);
+	return VARIABLE;
 }
 	YY_BREAK
 case 16:
 YY_RULE_SETUP
-#line 94 "minipseud.l"
-return(OP_PAR);
+#line 91 "minipseud.l"
+{
+	return OP_PAR;
+}
 	YY_BREAK
 case 17:
 YY_RULE_SETUP
 #line 95 "minipseud.l"
-return(CL_PAR);
+{
+	return CL_PAR;
+}
 	YY_BREAK
 case 18:
 YY_RULE_SETUP
-#line 97 "minipseud.l"
-{ yylval.node = createNode(NTPLUS); return(PLUS); }
+#line 99 "minipseud.l"
+{
+	yylval.node = create_node(NTPLUS);
+	return PLUS;
+}
 	YY_BREAK
 case 19:
 YY_RULE_SETUP
-#line 98 "minipseud.l"
-{ yylval.node = createNode(NTMIN); return(MIN); }
+#line 104 "minipseud.l"
+{
+	yylval.node = create_node(NTMIN);
+	return MIN;
+}
 	YY_BREAK
 case 20:
 YY_RULE_SETUP
-#line 99 "minipseud.l"
-{ yylval.node = createNode(NTMULT); return(MULT); }
+#line 109 "minipseud.l"
+{
+	yylval.node = create_node(NTMULT);
+	return MULT;
+}
 	YY_BREAK
 case 21:
 YY_RULE_SETUP
-#line 100 "minipseud.l"
-{ yylval.node = createNode(NTDIV); return(DIV); }
+#line 114 "minipseud.l"
+{
+	yylval.node = create_node(NTDIV);
+	return DIV;
+}
 	YY_BREAK
 case 22:
 YY_RULE_SETUP
-#line 101 "minipseud.l"
-{ yylval.node = createNode(NTPOW); return(POW); }
+#line 119 "minipseud.l"
+{
+	yylval.node = create_node(NTPOW);
+	return POW;
+}
 	YY_BREAK
 case 23:
 YY_RULE_SETUP
-#line 103 "minipseud.l"
-{ yylval.node = createNode(NTEGAL); return(EGAL); } 
+#line 124 "minipseud.l"
+{
+	yylval.node = create_node(NTEGAL);
+	return EGAL;
+} 
 	YY_BREAK
 case 24:
 YY_RULE_SETUP
-#line 105 "minipseud.l"
-{ return(COLON); }
+#line 129 "minipseud.l"
+{
+	return COLON;
+}
 	YY_BREAK
 case 25:
 /* rule 25 can match eol */
 YY_RULE_SETUP
-#line 107 "minipseud.l"
-{ return(EOL); }
+#line 133 "minipseud.l"
+{
+	return EOL;
+}
 	YY_BREAK
 case 26:
 YY_RULE_SETUP
-#line 108 "minipseud.l"
+#line 137 "minipseud.l"
 ECHO;
 	YY_BREAK
-#line 955 "lex.yy.c"
+#line 979 "lex.yy.c"
 case YY_STATE_EOF(INITIAL):
 	yyterminate();
 
@@ -1949,4 +1973,7 @@ void yyfree (void * ptr )
 
 #define YYTABLES_NAME "yytables"
 
-#line 108 "minipseud.l"
+#line 137 "minipseud.l"
+
+
+

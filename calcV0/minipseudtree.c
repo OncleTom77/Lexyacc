@@ -1,27 +1,23 @@
-#include <stdlib.h>
-#include <string.h>
-#include <stdio.h>
-#include "minipseudtree.h"
+#include "includes.h"
 
-#define PRINTTAB 2
-
-Node *createNode(int type) {
-	Node *newnode 		= (Node *) malloc(sizeof(Node));
+Node *create_node(int type) {
+	Node *newnode 		= malloc(sizeof(Node));
 	newnode->type 		= type;
 	newnode->children 	= NULL;
 
 	return newnode;
 }
 
-Node* nodeChildren(Node *father, Node *child1, Node *child2) { 
-	father->children 	= (Node **) malloc(sizeof(Node *) * 2);
+Node* add_children_to_node(Node *father, Node *child1, Node *child2) {
+
+	father->children 	= malloc(sizeof(Node *) * 2);
 	father->children[0] = child1;
 	father->children[1] = child2;
 
 	return father;
 }
 
-const char *node2String(Node *node) {	
+const char *node_to_string(Node *node) {	
 	
 	char *res;
 	
@@ -35,16 +31,16 @@ const char *node2String(Node *node) {
 		case NTINST:
 			return "NTINST";
 
-	 	case NTNUM:
-			res = (char *) malloc(sizeof(char) * 32);
+		case NTNUM:
+			res = malloc(sizeof(char) * 32);
 			sprintf(res, "NTNUM -> %f", node->val);
 			return res;
 
 		case NTVAR:
-			res = (char *) malloc(sizeof(char) * 32);
+			res = malloc(sizeof(char) * 32);
 			sprintf(res, "NTVAR -> %s", node->var);
 			return res;
-	 
+	
 		case NTPLUS:
 			return "NTPLUS";
 		case NTMIN:
@@ -92,28 +88,7 @@ const char *node2String(Node *node) {
 	};
 }
 
-const char *makeSpaces(int depth, int fdepth) {
-	int nbspaces = depth * PRINTTAB;	
-	char *spaces = (char *) malloc(sizeof(char) * nbspaces);
-	
-	if (depth == fdepth)		
-		memset(spaces, ' ', nbspaces);
-	else {
-		int midspaces 	= fdepth * PRINTTAB;
-		int endline 	= (depth - fdepth) * PRINTTAB - 1;
-
-		memset(spaces, ' ', midspaces);
-		spaces[midspaces] = '\\';
-
-		char *tmpline =  (char *) malloc(sizeof(char) * endline);
-		memset(tmpline, '_', endline);
-		strcat(spaces, tmpline);
-		free(tmpline);
-	}
-	return spaces;
-}
-
-void printGraphRecu(Node *node, int n) {
+void recursive_graph(Node *node, int n) {
 	
 	int i;
 
@@ -123,27 +98,15 @@ void printGraphRecu(Node *node, int n) {
 	for (i = 0; i < n; i++)
 		printf(" ");
 
-	printf("%s\n", node2String(node));
+	printf("%s\n", node_to_string(node));
 	
 	// Hack : No children only if null or number or variable or PRINT
 	if ((node->children != NULL) && (node->type != NTNUM) && (node->type != NTVAR)) {
-		printGraphRecu(node->children[0], n + 1);
-		printGraphRecu(node->children[1], n + 1);
+		recursive_graph(node->children[0], n + 1);
+		recursive_graph(node->children[1], n + 1);
 	}
 }
 
-void printGraphRec(Node *node, int depth, int fdepth) {
-	
-	printf("%s%s\n", makeSpaces(depth, fdepth), node2String(node));
-	
-	// Hack : No children only if null or number or variable
-	if ((node->children != NULL) && (node->type != NTNUM) && (node->type != NTVAR)) {
-		printGraphRec(node->children[0], depth + 1, depth);
-		printGraphRec(node->children[1], depth + 1, depth);
-	}
+void print_graph(Node *root) {
+	recursive_graph(root, 0);
 }
-
-void printGraph(Node *root) {
-	printGraphRecu(root, 0);
-}
-

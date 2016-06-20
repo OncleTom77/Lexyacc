@@ -1,44 +1,42 @@
-#include <stdlib.h>
-#include <string.h>
-#include <stdio.h>
-#include "minipseudlist.h"
+#include "includes.h"
 
-t_list_chain *list_chain_create(char *var, double val) {
-    
-  	t_list_chain *maillon = malloc(sizeof(t_list_chain));
+t_list_chain *list_chain_create(char *name, double value) {
 
-	maillon->name 	= strdup(var);
-	maillon->value 	= val;
-	maillon->next 	= NULL;
+	t_list_chain *new 	= malloc(sizeof(t_list_chain));
 
-	return maillon;
+	new->name 			= strdup(name);
+	new->value 			= value;
+	new->next 			= NULL;
+
+	return new;
 }
 
-void list_chain_append(t_list_chain **list, char *var, double val) {
-  
-	t_list_chain *newMaillon = list_chain_create(var, val);
+void list_chain_append(t_list_chain **list, char *name, double value) {
 
-	while (*list != NULL) {
-		
-		if (strcmp((*list)->name, var) == 0) {
-			(*list)->value = val;
+	t_list_chain *new = list_chain_create(name, value);
+
+	while (*list) {
+		if (strcmp((*list)->name, name) == 0) {
+			(*list)->value = value;
 			return;
 		}
+
 		list = &(*list)->next;
 	}
 
-	*list = newMaillon;
+	*list = new;
 }
 
-double get_value_in_list(t_list_chain *list, char *var) {
-  
-	t_list_chain *elem = list;
+double get_value_in_list(t_list_chain *list, char *name) {
 
-	while (elem != NULL) {
-		if (strcmp(elem->name, var) == 0) {
-			return elem->value;
+	t_list_chain *save = list;
+
+	while (save) {
+		if (strcmp(save->name, name) == 0) {
+			return save->value;
 		}
-		elem = elem->next;
+		save = save->next;
 	}
-	return 0.0;
+
+	return 0.;
 }
