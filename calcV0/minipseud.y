@@ -70,8 +70,6 @@
 
 		| PRINT OP_PAR Expr CL_PAR { 
 			$$ = add_children_to_node($1, $3, NULL);
-			/*$$ = $3;
-			printf("%lf\n", eval($3, &list));*/
 		}
 
 		| SI OP_PAR Expr CL_PAR ALORS Instlist FIN {
@@ -96,7 +94,7 @@
 	;
 
 	Expr :
-		NUM	{
+		NUM {
 			$$ = $1;
 		}
 
@@ -121,7 +119,8 @@
 		}
 
 		| MIN Expr %prec NEG {
-			Node *moinsUn = create_node(NTNUM); moinsUn->val = -1;
+			Node *moinsUn 	= create_node(NTNUM);
+			moinsUn->val 	= -1;
 			$$ = add_children_to_node(create_node(NTMULT), moinsUn, $2);
 		}
 
@@ -132,7 +131,7 @@
 		| OP_PAR Expr CL_PAR {
 			$$ = $2;
 		}
-		
+
 		| Expr COMPEGAL	Expr {
 			$$ = add_children_to_node($2, $1, $3);
 		}
@@ -153,17 +152,17 @@
 
 int exec(Node *node) {
 	print_graph(node);
-	eval(node, &list);
+	evalInst(node, &list);
 }
 
 int yyerror(char *s) {
 	printf("%s\n", s);
 }
 
-int main(int arc, char **argv) {
+int main(int argc, char **argv) {
 
-	if ((arc == 3) && (strcmp(argv[1], "-f") == 0)) {
-		FILE *fp = fopen(argv[2],"r");
+	if ((argc == 3) && (strcmp(argv[1], "-f") == 0)) {
+		FILE *fp = fopen(argv[2], "r");
 		
 		if (!fp) {
 			printf("Impossible d'ouvrir le fichier à executer.\n");
