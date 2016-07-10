@@ -1,0 +1,5 @@
+minipseud
+minipseud.h
+minipseud.lex.c
+minipseud*.o
+minipseud.y.c
