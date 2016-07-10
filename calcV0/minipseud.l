@@ -12,7 +12,7 @@ exp			[eE][+-]?{int}
 
 real		{int}("."{int})?{exp}?
 
-variable	[a-zA-Z]+
+variable	[a-zA-Z]+[a-zA-Z0-9]*
 
 %%
 
