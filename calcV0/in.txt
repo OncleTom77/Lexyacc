@@ -32,3 +32,10 @@ toto = 0;
 FOR(i=0; i<10; i=i+1) FAIRE PRINT(i); toto = toto + i; FIN;
 
 PRINT(toto);
+
+max = 10;
+next = 0;
+t1 = 0;
+t2 = 1;
+
+FOR(i = 1; i < max + 1; i = i + 1) FAIRE next = t1 + t2; t1 = t2; t2 = next; PRINT(next); FIN;

@@ -3,10 +3,8 @@
 
 #include "includes.h"
 
-double evalExpr(Node *);
+double evalExpr(Node *, t_list_chain **);
 
-double evalInst(Node *);
-
-double eval(Node *, t_list_chain **);
+double evalInst(Node *, t_list_chain **);
 
 #endif

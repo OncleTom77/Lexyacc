@@ -460,7 +460,7 @@ static const yytype_uint8 yyrline[] =
 {
        0,    40,    40,    41,    45,    46,    52,    56,    62,    66,
       70,    74,    78,    82,    86,    96,   100,   104,   108,   112,
-     116,   120,   125,   129,   133,   137,   141,   145
+     116,   120,   126,   130,   134,   138,   142,   146
 };
 #endif
 
@@ -1454,62 +1454,63 @@ yyreduce:
   case 21:
 #line 120 "minipseud.y" /* yacc.c:1646  */
     {
-			Node *moinsUn = create_node(NTNUM); moinsUn->val = -1;
+			Node *moinsUn 	= create_node(NTNUM);
+			moinsUn->val 	= -1;
 			(yyval.node) = add_children_to_node(create_node(NTMULT), moinsUn, (yyvsp[0].node));
 		}
-#line 1461 "minipseud.tab.c" /* yacc.c:1646  */
+#line 1462 "minipseud.tab.c" /* yacc.c:1646  */
     break;
 
   case 22:
-#line 125 "minipseud.y" /* yacc.c:1646  */
+#line 126 "minipseud.y" /* yacc.c:1646  */
     {
 			(yyval.node) = add_children_to_node((yyvsp[-1].node), (yyvsp[-2].node), (yyvsp[0].node));
 		}
-#line 1469 "minipseud.tab.c" /* yacc.c:1646  */
+#line 1470 "minipseud.tab.c" /* yacc.c:1646  */
     break;
 
   case 23:
-#line 129 "minipseud.y" /* yacc.c:1646  */
+#line 130 "minipseud.y" /* yacc.c:1646  */
     {
 			(yyval.node) = (yyvsp[-1].node);
 		}
-#line 1477 "minipseud.tab.c" /* yacc.c:1646  */
+#line 1478 "minipseud.tab.c" /* yacc.c:1646  */
     break;
 
   case 24:
-#line 133 "minipseud.y" /* yacc.c:1646  */
+#line 134 "minipseud.y" /* yacc.c:1646  */
     {
 			(yyval.node) = add_children_to_node((yyvsp[-1].node), (yyvsp[-2].node), (yyvsp[0].node));
 		}
-#line 1485 "minipseud.tab.c" /* yacc.c:1646  */
+#line 1486 "minipseud.tab.c" /* yacc.c:1646  */
     break;
 
   case 25:
-#line 137 "minipseud.y" /* yacc.c:1646  */
+#line 138 "minipseud.y" /* yacc.c:1646  */
     {
 			(yyval.node) = add_children_to_node((yyvsp[-1].node), (yyvsp[-2].node), (yyvsp[0].node));
 		}
-#line 1493 "minipseud.tab.c" /* yacc.c:1646  */
+#line 1494 "minipseud.tab.c" /* yacc.c:1646  */
     break;
 
   case 26:
-#line 141 "minipseud.y" /* yacc.c:1646  */
+#line 142 "minipseud.y" /* yacc.c:1646  */
     {
 			(yyval.node) = add_children_to_node((yyvsp[-1].node), (yyvsp[-2].node), (yyvsp[0].node));
 		}
-#line 1501 "minipseud.tab.c" /* yacc.c:1646  */
+#line 1502 "minipseud.tab.c" /* yacc.c:1646  */
     break;
 
   case 27:
-#line 145 "minipseud.y" /* yacc.c:1646  */
+#line 146 "minipseud.y" /* yacc.c:1646  */
     {
 			(yyval.node) = add_children_to_node((yyvsp[-1].node), (yyvsp[-2].node), (yyvsp[0].node));
 		}
-#line 1509 "minipseud.tab.c" /* yacc.c:1646  */
+#line 1510 "minipseud.tab.c" /* yacc.c:1646  */
     break;
 
 
-#line 1513 "minipseud.tab.c" /* yacc.c:1646  */
+#line 1514 "minipseud.tab.c" /* yacc.c:1646  */
       default: break;
     }
   /* User semantic actions sometimes alter yychar, and that requires
@@ -1737,12 +1738,12 @@ yyreturn:
 #endif
   return yyresult;
 }
-#line 149 "minipseud.y" /* yacc.c:1906  */
+#line 150 "minipseud.y" /* yacc.c:1906  */
 
 
 int exec(Node *node) {
 	print_graph(node);
-	eval(node, &list);
+	evalInst(node, &list);
 }
 
 int yyerror(char *s) {

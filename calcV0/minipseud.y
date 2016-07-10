@@ -118,7 +118,8 @@
 		}
 
 		| MIN Expr %prec NEG {
-			Node *moinsUn = create_node(NTNUM); moinsUn->val = -1;
+			Node *moinsUn 	= create_node(NTNUM);
+			moinsUn->val 	= -1;
 			$$ = add_children_to_node(create_node(NTMULT), moinsUn, $2);
 		}
 
@@ -150,7 +151,7 @@
 
 int exec(Node *node) {
 	print_graph(node);
-	eval(node, &list);
+	evalInst(node, &list);
 }
 
 int yyerror(char *s) {
