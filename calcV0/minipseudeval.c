@@ -71,7 +71,7 @@ double evalInst(Node *node, t_list_chain **list) {
 			return 0.;
 
 		case NTFOR:
-			for(evalInst(node->children[0]->children[0], list); evalInst(node->children[0]->children[1], list) != 0; evalInst(node->children[1]->children[0], list))
+			for (evalInst(node->children[0]->children[0], list); evalInst(node->children[0]->children[1], list) != 0; evalInst(node->children[1]->children[0], list))
 				evalInst(node->children[1]->children[1], list);
 			return 0.;
 

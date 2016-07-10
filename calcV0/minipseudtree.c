@@ -8,7 +8,7 @@ Node *create_node(int type) {
 	return newnode;
 }
 
-Node* add_children_to_node(Node *father, Node *child1, Node *child2) {
+Node *add_children_to_node(Node *father, Node *child1, Node *child2) {
 
 	father->children 	= malloc(sizeof(Node *) * 2);
 	father->children[0] = child1;
