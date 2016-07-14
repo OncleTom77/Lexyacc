@@ -41,7 +41,6 @@
 		| Line Input { /* Nothing ... */ }
 	;
 
-
 	Line :
 		EOL { }
 		| Instlist EOL {

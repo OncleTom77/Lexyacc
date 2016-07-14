@@ -469,9 +469,9 @@ static const yytype_int8 yyrhs[] =
 /* YYRLINE[YYN] -- source line where rule number YYN was defined.  */
 static const yytype_uint8 yyrline[] =
 {
-       0,    40,    40,    41,    46,    47,    53,    57,    63,    67,
-      71,    75,    79,    83,    87,    97,   101,   105,   109,   113,
-     117,   121,   127,   131,   135,   139,   143,   147
+       0,    40,    40,    41,    45,    46,    52,    56,    62,    66,
+      70,    74,    78,    82,    86,    96,   100,   104,   108,   112,
+     116,   120,   126,   130,   134,   138,   142,   146
 };
 #endif
 
@@ -1454,75 +1454,75 @@ yyreduce:
     break;
 
   case 4:
-#line 46 "minipseud.y"
+#line 45 "minipseud.y"
     { ;}
     break;
 
   case 5:
-#line 47 "minipseud.y"
+#line 46 "minipseud.y"
     {
 			exec((yyvsp[(1) - (2)].node));
 		;}
     break;
 
   case 6:
-#line 53 "minipseud.y"
+#line 52 "minipseud.y"
     {
 			(yyval.node) = (yyvsp[(1) - (2)].node);
 		;}
     break;
 
   case 7:
-#line 57 "minipseud.y"
+#line 56 "minipseud.y"
     {
 			(yyval.node) = add_children_to_node(create_node(NTINSTLIST), (yyvsp[(1) - (3)].node), (yyvsp[(2) - (3)].node));
 		;}
     break;
 
   case 8:
-#line 63 "minipseud.y"
+#line 62 "minipseud.y"
     {
 			(yyval.node) = add_children_to_node((yyvsp[(2) - (3)].node), (yyvsp[(1) - (3)].node), (yyvsp[(3) - (3)].node));
 		;}
     break;
 
   case 9:
-#line 67 "minipseud.y"
+#line 66 "minipseud.y"
     {
 			(yyval.node) = (yyvsp[(1) - (1)].node);
 		;}
     break;
 
   case 10:
-#line 71 "minipseud.y"
+#line 70 "minipseud.y"
     { 
 			(yyval.node) = add_children_to_node((yyvsp[(1) - (4)].node), (yyvsp[(3) - (4)].node), NULL);
 		;}
     break;
 
   case 11:
-#line 75 "minipseud.y"
+#line 74 "minipseud.y"
     {
 			(yyval.node) = add_children_to_node((yyvsp[(1) - (7)].node), (yyvsp[(3) - (7)].node), (yyvsp[(6) - (7)].node));
 		;}
     break;
 
   case 12:
-#line 79 "minipseud.y"
+#line 78 "minipseud.y"
     {
 			(yyval.node) = add_children_to_node((yyvsp[(1) - (9)].node), (yyvsp[(3) - (9)].node), add_children_to_node((yyvsp[(5) - (9)].node), (yyvsp[(6) - (9)].node), (yyvsp[(8) - (9)].node)));
 		;}
     break;
 
   case 13:
-#line 83 "minipseud.y"
+#line 82 "minipseud.y"
     {
 			(yyval.node) = add_children_to_node((yyvsp[(1) - (7)].node), (yyvsp[(3) - (7)].node), (yyvsp[(6) - (7)].node));
 		;}
     break;
 
   case 14:
-#line 87 "minipseud.y"
+#line 86 "minipseud.y"
     {
 			(yyval.node) = add_children_to_node(
 					(yyvsp[(1) - (11)].node),
@@ -1533,49 +1533,49 @@ yyreduce:
     break;
 
   case 15:
-#line 97 "minipseud.y"
+#line 96 "minipseud.y"
     {
 			(yyval.node) = (yyvsp[(1) - (1)].node);
 		;}
     break;
 
   case 16:
-#line 101 "minipseud.y"
+#line 100 "minipseud.y"
     {
 			(yyval.node) = (yyvsp[(1) - (1)].node);
 		;}
     break;
 
   case 17:
-#line 105 "minipseud.y"
+#line 104 "minipseud.y"
     {
 			(yyval.node) = add_children_to_node((yyvsp[(2) - (3)].node), (yyvsp[(1) - (3)].node), (yyvsp[(3) - (3)].node));
 		;}
     break;
 
   case 18:
-#line 109 "minipseud.y"
+#line 108 "minipseud.y"
     {
 			(yyval.node) = add_children_to_node((yyvsp[(2) - (3)].node), (yyvsp[(1) - (3)].node), (yyvsp[(3) - (3)].node));
 		;}
     break;
 
   case 19:
-#line 113 "minipseud.y"
+#line 112 "minipseud.y"
     {
 			(yyval.node) = add_children_to_node((yyvsp[(2) - (3)].node), (yyvsp[(1) - (3)].node), (yyvsp[(3) - (3)].node));
 		;}
     break;
 
   case 20:
-#line 117 "minipseud.y"
+#line 116 "minipseud.y"
     {
 			(yyval.node) = add_children_to_node((yyvsp[(2) - (3)].node), (yyvsp[(1) - (3)].node), (yyvsp[(3) - (3)].node));
 		;}
     break;
 
   case 21:
-#line 121 "minipseud.y"
+#line 120 "minipseud.y"
     {
 			Node *moinsUn 	= create_node(NTNUM);
 			moinsUn->val 	= -1;
@@ -1584,42 +1584,42 @@ yyreduce:
     break;
 
   case 22:
-#line 127 "minipseud.y"
+#line 126 "minipseud.y"
     {
 			(yyval.node) = add_children_to_node((yyvsp[(2) - (3)].node), (yyvsp[(1) - (3)].node), (yyvsp[(3) - (3)].node));
 		;}
     break;
 
   case 23:
-#line 131 "minipseud.y"
+#line 130 "minipseud.y"
     {
 			(yyval.node) = (yyvsp[(2) - (3)].node);
 		;}
     break;
 
   case 24:
-#line 135 "minipseud.y"
+#line 134 "minipseud.y"
     {
 			(yyval.node) = add_children_to_node((yyvsp[(2) - (3)].node), (yyvsp[(1) - (3)].node), (yyvsp[(3) - (3)].node));
 		;}
     break;
 
   case 25:
-#line 139 "minipseud.y"
+#line 138 "minipseud.y"
     {
 			(yyval.node) = add_children_to_node((yyvsp[(2) - (3)].node), (yyvsp[(1) - (3)].node), (yyvsp[(3) - (3)].node));
 		;}
     break;
 
   case 26:
-#line 143 "minipseud.y"
+#line 142 "minipseud.y"
     {
 			(yyval.node) = add_children_to_node((yyvsp[(2) - (3)].node), (yyvsp[(1) - (3)].node), (yyvsp[(3) - (3)].node));
 		;}
     break;
 
   case 27:
-#line 147 "minipseud.y"
+#line 146 "minipseud.y"
     {
 			(yyval.node) = add_children_to_node((yyvsp[(2) - (3)].node), (yyvsp[(1) - (3)].node), (yyvsp[(3) - (3)].node));
 		;}
@@ -1841,7 +1841,7 @@ yyreturn:
 }
 
 
-#line 151 "minipseud.y"
+#line 150 "minipseud.y"
 
 
 int exec(Node *node) {
