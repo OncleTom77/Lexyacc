@@ -81,6 +81,11 @@ PRINT {
 	return PRINT;
 }
 
+FUNCTION {
+	yylval.node = create_node(NTFUNCTION);
+	return FUNCTION;
+}
+
 {variable} {
 	yylval.node 		= create_node(NTVAR);
 	yylval.node->var 	= strdup(yytext);

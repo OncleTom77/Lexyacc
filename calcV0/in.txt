@@ -34,3 +34,9 @@ t1 = 0;
 t2 = 1;
 
 FOR(i = 1; i < max + 1; i = i + 1) FAIRE next = t1 + t2; t1 = t2; t2 = next; PRINT(next); FIN;
+
+FUNCTION mafonction() PRINT(toto); toto = toto + 1; FIN;
+
+mafonction();
+mafonction();
+mafonction();

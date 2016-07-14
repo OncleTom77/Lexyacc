@@ -7,8 +7,8 @@
 #include <math.h>
 #include <setjmp.h>
 
-#include "minipseudlist.h"
 #include "minipseudtree.h"
+#include "minipseudlist.h"
 #include "minipseudeval.h"
 #include "minipseud.h"
 

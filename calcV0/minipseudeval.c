@@ -25,15 +25,15 @@ double evalExpr(Node *node, t_list_chain **list) {
 	};
 }
 
-double evalInst(Node *node, t_list_chain **list) {
+double evalInst(Node *node, t_list_chain **list, t_list_chain_function **list_function) {
 
 	switch (node->type) {
 		case NTEMPTY:
 			return 0.;
 
 		case NTINSTLIST:
-			evalInst(node->children[0], list);
-			evalInst(node->children[1], list);
+			evalInst(node->children[0], list, list_function);
+			evalInst(node->children[1], list, list_function);
 			return 0.;
 
 		case NTNUM:
@@ -54,25 +54,25 @@ double evalInst(Node *node, t_list_chain **list) {
 		case NTSI:
 			// SI ... ALORS ... SINON
 			if (node->children[1]->type == NTALORS) {
-				if (evalInst(node->children[0], list) != 0)
-					evalInst(node->children[1]->children[0], list);
+				if (evalInst(node->children[0], list, list_function) != 0)
+					evalInst(node->children[1]->children[0], list, list_function);
 				else
-					evalInst(node->children[1]->children[1], list);
+					evalInst(node->children[1]->children[1], list, list_function);
 			} else {
 				// SI ... ALORS ...
-				if (evalInst(node->children[0], list) != 0)
-					evalInst(node->children[1], list);
+				if (evalInst(node->children[0], list, list_function) != 0)
+					evalInst(node->children[1], list, list_function);
 			}
 			return 0.;
 
 		case NTTANTQUE:
-			while (evalInst(node->children[0], list) != 0)
-				evalInst(node->children[1], list);
+			while (evalInst(node->children[0], list, list_function) != 0)
+				evalInst(node->children[1], list, list_function);
 			return 0.;
 
 		case NTFOR:
-			for (evalInst(node->children[0]->children[0], list); evalInst(node->children[0]->children[1], list) != 0; evalInst(node->children[1]->children[0], list))
-				evalInst(node->children[1]->children[1], list);
+			for (evalInst(node->children[0]->children[0], list, list_function); evalInst(node->children[0]->children[1], list, list_function) != 0; evalInst(node->children[1]->children[0], list, list_function))
+				evalInst(node->children[1]->children[1], list, list_function);
 			return 0.;
 
 		case NTCOMPEGAL:
@@ -90,6 +90,15 @@ double evalInst(Node *node, t_list_chain **list) {
 		case NTPRINT:
 			printf("%lf\n", evalExpr(node->children[0], list));
 			return 0.;
+
+		case NTFUNCTION:
+			list_chain_function_append(list_function, node->children[0]->var, node->children[1]);
+			return 0.;
+
+		case NTVARFUNCT: {
+			Node *funct_node = get_node_in_list_function(*list_function, node->var);
+			return (funct_node != NULL) ? evalInst(funct_node, list, list_function) : 0.;
+		}
 
 		default:
 			printf("Error in evalInst ... Wrong node type: %s\n", node_to_string(node));

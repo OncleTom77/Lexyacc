@@ -56,14 +56,15 @@
      TANTQUE = 272,
      FOR = 273,
      PRINT = 274,
-     OP_PAR = 275,
-     CL_PAR = 276,
-     COLON = 277,
-     SINON = 278,
-     FAIRE = 279,
-     NEG = 280,
-     EOL = 281,
-     FIN = 282
+     FUNCTION = 275,
+     OP_PAR = 276,
+     CL_PAR = 277,
+     COLON = 278,
+     SINON = 279,
+     FAIRE = 280,
+     NEG = 281,
+     EOL = 282,
+     FIN = 283
    };
 #endif
 /* Tokens.  */
@@ -84,26 +85,27 @@
 #define TANTQUE 272
 #define FOR 273
 #define PRINT 274
-#define OP_PAR 275
-#define CL_PAR 276
-#define COLON 277
-#define SINON 278
-#define FAIRE 279
-#define NEG 280
-#define EOL 281
-#define FIN 282
+#define FUNCTION 275
+#define OP_PAR 276
+#define CL_PAR 277
+#define COLON 278
+#define SINON 279
+#define FAIRE 280
+#define NEG 281
+#define EOL 282
+#define FIN 283
 
 
 
 
 #if ! defined YYSTYPE && ! defined YYSTYPE_IS_DECLARED
 typedef union YYSTYPE
-#line 10 "minipseud.y"
+#line 11 "minipseud.y"
 {
 	struct Node *node;
 }
 /* Line 1529 of yacc.c.  */
-#line 107 "minipseud.tab.h"
+#line 109 "minipseud.tab.h"
 	YYSTYPE;
 # define yystype YYSTYPE /* obsolescent; will be withdrawn */
 # define YYSTYPE_IS_DECLARED 1

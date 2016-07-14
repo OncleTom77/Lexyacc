@@ -16,6 +16,8 @@ enum NodeType {
 
 	NTNUM   	= 201,
 	NTVAR 		= 202,
+	NTFUNCTION	= 203,
+	NTVARFUNCT	= 204,
 
 	NTPLUS  	= 321,
 	NTMIN   	= 322,

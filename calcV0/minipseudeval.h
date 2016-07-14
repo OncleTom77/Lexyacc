@@ -5,6 +5,6 @@
 
 double evalExpr(Node *, t_list_chain **);
 
-double evalInst(Node *, t_list_chain **);
+double evalInst(Node *, t_list_chain **, t_list_chain_function **);
 
 #endif

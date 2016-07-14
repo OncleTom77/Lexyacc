@@ -82,6 +82,14 @@ const char *node_to_string(Node *node) {
 
 		case NTPRINT:
 			return "NTPRINT";
+
+		case NTFUNCTION:
+			return "NTFUNCTION";
+
+		case NTVARFUNCT:
+			res = malloc(sizeof(char) * 32);
+			sprintf(res, "NTVARFUNCT -> %s", node->var);
+			return res;
 		
 		default:
 			return "UNK";
@@ -101,7 +109,7 @@ void recursive_graph(Node *node, int n) {
 	printf("%s\n", node_to_string(node));
 	
 	// Hack : No children only if null or number or variable or PRINT
-	if ((node->children != NULL) && (node->type != NTNUM) && (node->type != NTVAR)) {
+	if ((node->children != NULL) && (node->type != NTNUM) && (node->type != NTVAR) && (node->type != NTVARFUNCT)) {
 		recursive_graph(node->children[0], n + 1);
 		recursive_graph(node->children[1], n + 1);
 	}

@@ -4,7 +4,8 @@
 	extern int	yyparse();
 	extern FILE *yyin;
 
-	t_list_chain *list = NULL;
+	t_list_chain *list 						= NULL;
+	t_list_chain_function *list_function 	= NULL;
 %}
 
 %union {
@@ -19,6 +20,7 @@
 %token	<node> TANTQUE
 %token	<node> FOR
 %token	<node> PRINT
+%token	<node> FUNCTION
 %token	OP_PAR CL_PAR COLON
 %token	SINON
 %token	FAIRE
@@ -90,6 +92,16 @@
 					add_children_to_node(create_node(NTFORTRAIT), $7, $10)
 				);
 		}
+
+		| FUNCTION VARIABLE OP_PAR CL_PAR Instlist FIN {
+			$$ = add_children_to_node($1, $2, $5);
+		}
+
+		| VARIABLE OP_PAR CL_PAR {
+			Node *node = create_node(NTVARFUNCT);
+			node->var = strdup($1->var);
+			$$ = node;
+		}
 	;
 
 	Expr :
@@ -151,7 +163,7 @@
 
 int exec(Node *node) {
 	print_graph(node);
-	evalInst(node, &list);
+	evalInst(node, &list, &list_function);
 }
 
 int yyerror(char *s) {
