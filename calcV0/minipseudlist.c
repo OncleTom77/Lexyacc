@@ -38,7 +38,8 @@ double get_value_in_list(t_list_chain *list, char *name) {
 		save = save->next;
 	}
 
-	return 0.;
+	printf("Unknown var '%s'...\n", name);
+	exit(EXIT_FAILURE);
 }
 
 t_list_chain_function *list_chain_function_create(char *name, Node *node) {
@@ -79,4 +80,44 @@ Node *get_node_in_list_function(t_list_chain_function *list, char *name) {
 	}
 
 	return NULL;
+}
+
+void list_chain_free(t_list_chain **list) {
+
+	t_list_chain *to_delete;
+
+	while (*list) {
+		to_delete = *list;
+		list = &((*list)->next);
+		free(to_delete->name);
+		free(to_delete);
+	}
+}
+
+void list_chain_function_free(t_list_chain_function **list) {
+
+	t_list_chain_function *to_delete;
+
+	while (*list) {
+		to_delete = *list;
+		list = &((*list)->next);
+		free(to_delete->name);
+		node_free(to_delete->node);
+		free(to_delete);
+	}
+}
+
+void node_free(Node *node) {
+
+	if(!node)
+		return;
+
+	if(node->type == NTVAR || node->type == NTVARFUNCT) {
+		free(node->var);
+	} else if(node->children != NULL && node->type != NTNUM) {
+		node_free(node->children[0]);
+		node_free(node->children[1]);
+	}
+
+	free(node);
 }

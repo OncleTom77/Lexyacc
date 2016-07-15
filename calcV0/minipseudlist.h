@@ -27,4 +27,10 @@ void list_chain_function_append(t_list_chain_function **, char *, Node *);
 
 Node *get_node_in_list_function(t_list_chain_function *, char *);
 
+void list_chain_free(t_list_chain **);
+
+void list_chain_function_free(t_list_chain_function **);
+
+void node_free(Node *node);
+
 #endif

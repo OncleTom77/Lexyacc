@@ -183,6 +183,9 @@ int main(int argc, char **argv) {
 		yyin = fp;
 		yyparse();
 		fclose(fp);
+
+		list_chain_free(&list);
+		list_chain_function_free(&list_function);
 	}
 
 	return EXIT_SUCCESS;

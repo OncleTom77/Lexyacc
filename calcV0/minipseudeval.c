@@ -97,7 +97,12 @@ double evalInst(Node *node, t_list_chain **list, t_list_chain_function **list_fu
 
 		case NTVARFUNCT: {
 			Node *funct_node = get_node_in_list_function(*list_function, node->var);
-			return (funct_node != NULL) ? evalInst(funct_node, list, list_function) : 0.;
+			if (funct_node != NULL) {
+				return evalInst(funct_node, list, list_function);
+			} else {
+				printf("Unknown function '%s'...\n", node->var);
+				exit(EXIT_FAILURE);
+			}
 		}
 
 		default:
